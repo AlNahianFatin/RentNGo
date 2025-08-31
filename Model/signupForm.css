@@ -1,0 +1,265 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: poppins, sans-serif;
+}
+.sHeader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    padding: 25px 10px;
+    display: flex;
+    align-items: center;
+    gap:20px;
+    z-index: 100;
+}
+.sNavBar a {
+    position: relative;
+    font-size: 16px;
+    color:beige;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 30px;
+}
+.sNavBar a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: beige;
+    border-radius: 5px;
+    transform: translateY(10px);
+    transition: 0.5s;
+    opacity: 0;
+}
+.sNavBar a:hover::after{
+    transform: translateY(0);
+    opacity: 1;
+}
+a img{
+    color: aliceblue;
+}
+.signinContainer{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 500px;
+    width: 35%;
+    background: url('Porsche Wallpaper – stilvolle kostenlose Hintergrundbilder für Deine Devices.jpg') no-repeat center center/cover;
+    border-radius: 10px;
+}
+.signinContainer .sContent{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 80px;
+    color: azure;
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    background: transparent;
+    backdrop-filter: blur(7px);
+}
+.signinContainer.animate {
+  animation: clickSlide 0.5s ease;
+}
+.sformContainer{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 58%);
+    height: 100%;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border:2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    color: white;
+    font-weight:bold;
+}
+.sformContainer h2{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.sformContainer .firstName{
+    width: 300px;
+    height: 50px;
+    font-weight: bold;
+}
+.sformContainer .lastName{
+    width: 300px;
+    height: 50px;
+}
+.sformContainer .semail{
+    width: 300px;
+    height: 50px;
+}
+.sformContainer .epassword{
+    width: 300px;
+    height: 50px;
+}
+.sformContainer .confirmPassword{
+    width: 300px;
+    height: 50px;
+}
+#cbtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(84, 5, 29);
+    color: thistle;
+    width: 100%;
+    height: 45px;
+    border:2px solid thistle;
+    border-radius: 5px;
+    float: center;
+}
+#cbtn:hover{
+    background-color: rgb(74, 4, 25);
+    font-size: 16px;
+    border: 3.5px solid thistle;
+    box-shadow: 2px 2px 5px thistle;
+    width: 102%;
+    height: 47px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#cbtn:active{
+    background-color: rgb(84, 5, 29);;
+    color: thistle;
+    width: 100%;
+    height: 45px;
+    border:2px solid thistle;
+    border-radius: 5px;
+    box-shadow: none;
+}
+#sbtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(58, 58, 60);
+    color: thistle;
+    width: 100%;
+    height: 45px;
+    border:2px solid thistle;
+    border-radius: 5px;
+    float: center;
+}
+#sbtn:hover{
+    background-color: rgb(34, 34, 35);
+    font-size: 16px;
+    border: 3.5px solid thistle;
+    box-shadow: 2px 2px 5px thistle;
+    width: 102%;
+    height: 47px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#sbtn:active{
+    background-color: rgb(58, 58, 60);
+    color: thistle;
+    width: 100%;
+    height: 45px;
+    border:2px solid thistle;
+    border-radius: 5px;
+    box-shadow: none;
+}
+.firstName,
+.lastName,
+.semail,
+.epassword,
+.confirmPassword{
+    position: relative;
+    width: 100%;
+    height: 45px;
+    margin: 25px 0;
+}
+
+.firstName input,
+.lastName input,
+.semail input,
+.epassword input,
+.confirmPassword input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 2px solid thistle;
+    font-size: 16px;
+    color: white;
+    padding: 0 12px;
+} 
+.firstName label,
+.lastName label,
+.semail label,
+.epassword label,
+.confirmPassword label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: white;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+.firstName input:focus + label,
+.firstName input:valid + label,
+.lastName input:focus + label,
+.lastName input:valid + label,
+.semail input:focus + label,
+.semail input:valid + label,
+.epassword input:focus + label,
+.epassword input:valid + label,
+.confirmPassword input:focus + label,
+.confirmPassword input:valid + label {
+    top: 8px;
+    font-size: 12px;
+    color: thistle;
+    background: transparent;
+    padding: 0 4px;
+}
+
+.firstName,
+.lastName,
+.semail,
+.epassword,
+.confirmPassword {
+    margin: 5px 0;
+}
+#email_form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background-color:  rgb(232, 232, 238);
+    color: black;
+    width: 100%;
+    height: 45px;
+    border:2px solid black;
+    border-radius: 5px;
+    float: center;
+}
+.sBackground{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('Porsche Wallpaper – stilvolle kostenlose Hintergrundbilder für Deine Devices.jpg') no-repeat center center/cover;
+    border-radius: 10px;
+}

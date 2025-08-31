@@ -1,0 +1,388 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: poppins, sans-serif;
+}
+
+/* indexN.html */
+.header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    padding: 25px 10px;
+    display: flex;
+    align-items: center;
+    gap:20px;
+    z-index: 100;
+}
+.navBar a {
+    position: relative;
+    font-size: 16px;
+    color:beige;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 30px;
+}
+.navBar a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: beige;
+    border-radius: 5px;
+    transform: translateY(10px);
+    transition: 0.5s;
+    opacity: 0;
+}
+.navBar a:hover::after{
+    transform: translateY(0);
+    opacity: 1;
+}
+.background{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('Porsche Wallpaper – stilvolle kostenlose Hintergrundbilder für Deine Devices.jpg') no-repeat center center/cover;
+    border-radius: 10px;
+}
+.container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 550px;
+    width: 75%;
+    background: url('Porsche Wallpaper – stilvolle kostenlose Hintergrundbilder für Deine Devices.jpg') no-repeat center center/cover;
+    border-radius: 10px;
+}
+.container .content{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 58%;
+    height: 100%;
+    padding: 80px;
+    color: azure;
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    background: transparent
+}
+.container.animate {
+  animation: clickSlide 0.5s ease;
+}
+.container .form{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 58%);
+    height: 100%;
+}
+.content .icon{
+    color: beige;
+    font-size: 30px;
+}
+.text h2{
+    color: beige;
+    font-size: 40px;
+    line-height: 1;
+}
+.form .formContainer{
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(7px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border:2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    color: white;
+}
+.formContainer h2{
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.formContainer .uName{
+    width: 300px;
+    height: 50px;
+}
+.formContainer .pass{
+    width: 300px;
+    height: 50px;
+}
+.remember{
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    margin: -15px 0 15px;
+}
+.remember a{
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 45px;
+}
+.remember :hover{
+    text-decoration: underline;
+}
+#forgot{
+    text-decoration: none;
+}
+#lbtn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(58, 58, 60);
+    color: thistle;
+    width: 100%;
+    height: 45px;
+    border:2px solid thistle;
+    border-radius: 5px;
+    float: center;
+}
+#lbtn:hover{
+    background-color: rgb(34, 34, 35);
+    font-size: 16px;
+    border: 3.5px solid thistle;
+    box-shadow: 2px 2px 5px thistle;
+    width: 102%;
+    height: 47px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#lbtn:active{
+    background-color: rgb(58, 58, 60);
+    color: thistle;
+    width: 100%;
+    height: 45px;
+    border:2px solid thistle;
+    border-radius: 5px;
+}
+#rst{
+    background-color: rgb(137, 31, 31);
+    color: thistle;
+    width: 100%;
+    height: 45px;
+    border:2px solid thistle;
+    border-radius: 5px;
+    float: center;
+}
+#rst:hover{
+    background-color: rgb(186, 50, 48);
+    font-size: 16px;
+    border: 3.5px solid thistle;
+    box-shadow: 2px 2px 5px thistle;
+    width: 102%;
+    height: 47px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+#rst:active{
+     background-color: rgb(137, 31, 31);
+    color: thistle;
+    width: 100%;
+    height: 45px;
+    border:2px solid thistle;
+    border-radius: 5px;
+}
+.signup{
+    color: rgb(16, 53, 239);
+    text-decoration: none;
+    font-weight: 500;
+}
+.uName, .pass {
+    position: relative;
+    width: 100%;
+    height: 45px;
+    margin: 25px 0;
+}
+.uName input,
+.pass input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 2px solid thistle;
+    font-size: 16px;
+    color: white;
+    padding: 0 12px;
+} 
+.uName label,
+.pass label {
+    position: absolute;
+    top: 50%;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: white;
+    pointer-events: none;
+    transition: 0.3s ease;
+}
+.uName input:focus + label,
+.uName input:valid + label,
+.pass input:focus + label,
+.pass input:valid + label {
+    top: 8px;
+    font-size: 12px;
+    color: thistle;
+    background: transparent;
+    padding: 0 4px;
+}
+
+ .uName,.pass{
+    margin: 5px 0;
+}
+.signup{
+    color: rgb(16, 53, 239);
+    text-decoration: none;
+    font-weight: 500;
+}
+.signup:hover{
+    text-decoration: underline;
+}
+
+/* homepage */
+.homeNavBar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.homeNavBar a {
+    color: black;
+    text-decoration: none;
+    padding: 12px 16px;
+    transition: 0.3s;
+}
+
+.homeNavBar a:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* inventoryN.html */
+.inventory{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 10px;
+    display: flex;
+    align-items: center;
+    gap:20px;
+    z-index: 100;
+    background-color: rgb(2, 43, 43);
+}
+.iNav a{
+    position: relative;
+    font-size: 16px;
+    color:beige;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 30px;
+}
+.iNav a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: beige;
+    border-radius: 5px;
+    transform: translateY(10px);
+    transition: 0.5s;
+    opacity: 0;
+}
+.iNav a:hover::after{
+    transform: translateY(0);
+    opacity: 1;
+}
+#search{
+    margin-top:0px ;
+    height: 25px;
+}
+.footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    background-color: rgb(2, 43, 43);
+    color: white;
+}
+
+/* customerProfile */
+.customer{
+     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 10px;
+    display: flex;
+    align-items: center;
+    gap:20px;
+    z-index: 100;
+    background-color: rgb(2, 43, 43);
+}
+.customerNav a{
+     position: relative;
+    font-size: 16px;
+    color:beige;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 30px;
+}
+.customerNav a::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: beige;
+    border-radius: 5px;
+    transform: translateY(10px);
+    transition: 0.5s;
+    opacity: 0;
+}
+.customerNav a:hover::after{
+    transform: translateY(0);
+    opacity: 1;
+}
+#cSrscBtn{
+    margin-top:0px ;
+    height: 25px;
+    background-color: rgb(2, 43, 43);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#cSrscBtn:hover{
+    background-color: rgb(16, 53, 239);
+}
+
+.cfooter{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    background-color: rgb(2, 43, 43);
+    color: white;
+}
