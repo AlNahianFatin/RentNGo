@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Inika&family=Inknut+Antiqua&family=Inter:ital,opsz@0,14..32;1,14..32&family=Itim&family=Jaro:opsz@6..72&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    background-color: antiquewhite;
+}
+
+.font-itim {
+    font-family: Itim;
+    font-size: 23px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    position: sticky;
+    background-color: #312fbe;
+    color: white;
+    height: 25vh;
+}
+
+.logo {
+    height: 25vh;
+    margin: 0;
+    padding: 0;
+    min-width: 35vh;
+}
+
+.header>div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: #eba923;
+}
+
+h1 {
+    font-family: "Inknut antiqua";
+    font-size: 3.5em;
+    margin: 0;
+}
+
+h2 {
+    font-family: Inika;
+    font-size: 1.75em;
+    margin: 0;
+}
+
+form {
+    font-family: Itim;
+    font-size: 30px;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: auto;
+}
+
+.font-itim {
+    font-family: Itim;
+    font-size: 25px;
+}
+
+form .row {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin: 10px;
+}
+
+table {
+    border-collapse: collapse;
+    margin: auto;
+}
+
+input[type="text"]::placeholder {
+    background-color: antiquewhite;
+    text-align: center;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border: 2px solid #3E2522;
+    background-color: antiquewhite;
+    color: black;
+    box-shadow: 0 0 8px #3E2522;
+}
+
+table, td {
+    text-align: center;
+    width: auto;
+    min-width: 200px;
+    border: 2px solid black;
+    text-align: center;
+    text-overflow: scroll;
+    font-size: 20px;
+}
+
+input[type="submit"] {
+    font-family: Inter;
+    font-size: 20px;
+    padding: 3px 5px;
+    background-color: #eba923;
+}
+
+input[type="submit"]:hover {
+    transform: scale(1.1);
+    font-weight: bold;
+    box-shadow: 2px 6px 12px black;
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+button {
+    font-family: Inter;
+    font-size: 20px;
+    padding: 3px 5px;
+    background-color: #eba923;
+}
+
+button:hover {
+    transform: scale(1.1);
+    font-weight: bold;
+    box-shadow: 2px 6px 12px black;
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+select {
+    font-family: Itim;
+    font-size: 25px;
+    background-color: antiquewhite;
+    width: auto;
+    text-align: center;
+}
+
+select:hover {
+    transform: scale(1.05);
+    box-shadow: 2px 6px 12px black;
+    transition: transform 0.1s ease, background-color 0.1s ease;
+}
+
+select:focus {
+    outline: none;
+    border: 2px solid #3E2522;
+    background-color: antiquewhite;
+    color: black;
+    box-shadow: 0 0 8px #3E2522;
+}
+
+input[type="number"] {
+    background-color: antiquewhite;
+    width: 150px;
+    text-align: center;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border: 2px solid #3E2522;
+    background-color: antiquewhite;
+    color: black;
+    box-shadow: 0 0 8px #3E2522;
+}
+
+.loyaltyPoints {
+    animation: 1.5s rotate linear infinite;
+    transform: rotateY(360);
+}
+
+@keyframes rotate {
+    form{transform: rotate(0deg);}
+    to{transform: rotateY(360deg);}
+}
+
+input[type="password"]::placeholder {
+    background-color: antiquewhite;
+    text-align: center;
+}
+
+input[type="password"]:focus {
+    outline: none;
+    border: 2px solid #3E2522;
+    background-color: antiquewhite;
+    color: black;
+    box-shadow: 0 0 8px #3E2522;
+}

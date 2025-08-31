@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer_PickupLocation</title>
+
+    <link rel="stylesheet" href="../asset/style.css">
+</head>
+
+<body>
+    <div class="header">
+        <img src="../asset/RentNGo logo.png" class="logo" alt="RentNGo Logo">
+        <div>
+            <h1>RentNGo</h1>
+            <h2>Smart Rentals<br>Smooth Rides</h2>
+        </div>
+    </div>
+    <div style="margin-top: 180px; display: flex; align-items: center; justify-content: center; text-align: center; gap: 20px;">
+        <label for="search" class="font-itim">Search by airport/city:</label>
+        <input type="text" name="search" class="font-itim" style="border-radius: 10px;" placeholder="🔍Search">
+    </div>
+
+    <form action="" onsubmit="return validatePickupDropoff(event)" style=" flex-direction: column;">
+        <div class="row">
+            <label for="pickup_location">Pickup Location:</label>
+            <select id="pickup" name="pickup_location">
+                <option value="">Choose a pickup point</option>
+                <option value="khilKhet">Khilkhet</option>
+                <option value="Jamuna Future Park">Jamuna Future Park</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <label for="dropoff_location">Dropoff Location:</label>
+            <select id="dropoff" name="dropoff_location">
+                <option value="">Choose a dropoff point</option>
+                <option value="khilKhet">Khilkhet</option>
+                <option value="Jamuna Future Park">Jamuna Future Park</option>
+            </select>
+        </div>
+
+        <input type="submit" style="padding: 3px 5px;" name="submit" value="Confirm">
+    </form>
+
+
+    <a href="Admin_PickupLocation.html">
+        <button type="button">Admin View</button>
+    </a>
+
+    <script src="../asset/pickupLocations.js"></script>
+</body>
+
+</html>
