@@ -1,0 +1,61 @@
+/* ===============================
+   Booking Page Styles
+   =============================== */
+body {
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(to right, #56ccf2, #2f80ed);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2f80ed;
+}
+
+label {
+  font-weight: bold;
+  margin: 8px 0 5px;
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #2f80ed;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1c5dd4;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  font-weight: bold;
+}

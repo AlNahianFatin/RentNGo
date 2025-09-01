@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insurance Options</title>
+<link rel="stylesheet" href="../Assets/CSS/insuranceM.css" />
+
+</head>
+<body>
+  <form id="insuranceForm">
+    <h2>Insurance Options</h2>
+
+    <label for="coverageTier">Coverage Tier :</label>
+    <select id="coverageTier">
+      <option value="">Select</option>
+      <option value="basic">Basic</option>
+      <option value="standard">Standard</option>
+      <option value="premium">Premium</option>
+    </select>
+
+    <label for="deductible">Deductible Amount :</label>
+    <input type="number" id="deductible" />
+
+    <label for="claimScenario">Claim Scenario :</label>
+    <textarea id="claimScenario" rows="4"></textarea>
+
+    <button type="submit">Submit Insurance</button>
+    <p id="errorMessage" class="error"></p>
+  </form>
+
+  <!-- Load Model then Controller -->
+  <script src="../models/insuranceM.js"></script>
+  <script src="../controllers/insuranceControllerM.js"></script>
+</body>
+</html>

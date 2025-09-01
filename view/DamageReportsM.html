@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Damage Report</title>
+<link rel="stylesheet" href="../Assets/CSS/damageM.css" />
+
+</head>
+<body>
+  <form id="damageForm">
+    <h2>📝 Damage Report</h2>
+
+    <label for="vehicleId">Vehicle ID :</label>
+    <input type="text" id="vehicleId" style="text-transform: uppercase" />
+
+    <label for="damageType">Damage Type :</label>
+    <select id="damageType">
+      <option value="">Select</option>
+      <option value="scratch">Scratch</option>
+      <option value="dent">Dent</option>
+      <option value="broken-glass">Broken Glass</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label for="damagePhoto">Upload Photo :</label>
+    <input type="file" id="damagePhoto" accept="image/*" />
+    <p style="text-align: center">
+      <img id="photoPreview" alt="Damage Photo Preview" style="display:none;" />
+    </p>
+
+    <label for="signature">Signature :</label>
+    <input type="text" id="signature" style="text-transform: capitalize" />
+
+    <label for="signaturePhoto">Upload Signature Photo :</label>
+    <input type="file" id="signaturePhoto" accept="image/*" />
+    <p style="text-align: center">
+      <img id="signaturePreview" alt="Signature Photo Preview" style="display:none;" />
+    </p>
+
+    <button type="submit">Submit Report</button>
+    <p id="errorMessage" class="error"></p>
+  </form>
+
+  <!-- Load Model then Controller -->
+  <script src="../models/damageM.js"></script>
+  <script src="../controllers/damageControllerM.js"></script>
+</body>
+</html>

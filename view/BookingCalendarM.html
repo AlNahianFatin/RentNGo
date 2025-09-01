@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Car Rent Booking Calendar</title>
+  <link rel="stylesheet" href="../Assets/css/bookingM.css" />
+</head>
+<body>
+  <form id="bookingForm">
+    <h2>Booking Calendar</h2>
+
+    <label for="vehicleType">Vehicle Type</label>
+    <select id="vehicleType" name="vehicleType" required>
+      <option value="">Choose</option>
+      <option value="Premio">Premio</option>
+      <option value="Prado">Prado</option>
+      <option value="Hiace">Hiace</option>
+      <option value="BMW">BMW</option>
+      <option value="Allion">Allion</option>
+    </select>
+
+    <label for="pickupDate">Pickup Date</label>
+    <input type="date" id="pickupDate" name="pickupDate" required />
+
+    <label for="pickupTime">Pickup Time</label>
+    <input type="time" id="pickupTime" name="pickupTime" required />
+
+    <label for="returnDate">Return Date</label>
+    <input type="date" id="returnDate" name="returnDate" required />
+
+    <label for="returnTime">Return Time</label>
+    <input type="time" id="returnTime" name="returnTime" required />
+
+    <!-- 🔥 Dynamic price display -->
+    <p id="priceEstimate" style="font-weight:bold; color:green;"></p>
+
+    <button type="submit">Reserve Now</button>
+    <p id="errorMessage" class="error"></p>
+  </form>
+
+  <!-- Load model + controller -->
+  <script src="../Models/pricingM.js"></script>
+  <script src="../Controllers/bookingControllerM.js"></script>
+</body>
+</html>
