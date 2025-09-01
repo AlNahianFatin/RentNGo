@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pricing Calculator</title>
+<link rel="stylesheet" href="../Assets/CSS/pricingM.css" />
+
+</head>
+<body>
+  <form id="pricingForm">
+    <h2>Pricing Calculator</h2>
+
+    <label for="startDate">Start Date :</label>
+    <input type="date" id="startDate" required />
+
+    <label for="endDate">End Date :</label>
+    <input type="date" id="endDate" required />
+
+    <label for="vehicleType">Vehicle Type :</label>
+    <select id="vehicleType" required>
+      <option value="">Choose</option>
+      <option value="Premio">Premio</option>
+      <option value="Prado">Prado</option>
+      <option value="Hiace">Hiace</option>
+      <option value="BMW">BMW</option>
+      <option value="Allion">Allion</option>
+    </select>
+
+    <label for="promoCode">Promo Code :</label>
+    <input type="text" id="promoCode" />
+
+    <button type="submit">Calculate Price</button>
+    <p id="errorMessage" class="error"></p>
+  </form>
+
+  <!-- Load Model then Controller -->
+  <script src="../models/pricingM.js"></script>
+  <script src="../controllers/pricingControllerM.js"></script>
+</body>
+</html>

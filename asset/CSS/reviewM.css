@@ -1,0 +1,61 @@
+/* ===============================
+   Review & Rating Page Styles
+   =============================== */
+body {
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 550px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+h2 {
+  text-align: center;
+  color: #2575fc;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin: 8px 0 5px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #2575fc;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d5dc7;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: -5px;
+  margin-bottom: 10px;
+}

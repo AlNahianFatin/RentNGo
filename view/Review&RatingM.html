@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leave a Review</title>
+<link rel="stylesheet" href="../Assets/CSS/reviewM.css" />
+
+</head>
+<body>
+  <form id="reviewForm">
+    <h2>Leave a Review..!</h2>
+
+    <label for="name">Your Name *</label>
+    <input type="text" id="name" name="name" />
+    <span class="error" id="nameError"></span>
+
+    <label for="rating">Rating *</label>
+    <select id="rating" name="rating">
+      <option value="">-- Select Rating --</option>
+      <option value="5">★★★★★</option>
+      <option value="4">★★★★☆</option>
+      <option value="3">★★★☆☆</option>
+      <option value="2">★★☆☆☆</option>
+      <option value="1">★☆☆☆☆</option>
+    </select>
+    <span class="error" id="ratingError"></span>
+
+    <label for="comment">Comment</label>
+    <textarea id="comment" name="comment" rows="4"></textarea>
+    <span class="error" id="commentError"></span>
+
+    <button type="submit">Submit Review</button>
+  </form>
+
+  <!-- Load Model then Controller -->
+  <script src="../models/reviewM.js"></script>
+  <script src="../controllers/reviewControllerM.js"></script>
+</body>
+</html>
