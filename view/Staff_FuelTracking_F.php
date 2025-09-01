@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Staff_FuelTracking</title>
 
-    <link rel="stylesheet" href="../asset/style.css">
+    <link rel="stylesheet" href="../asset/style_F.css">
 </head>
 
 <body>
@@ -40,11 +40,11 @@
             <input type="submit" name="submit" value="Submit">
         </fieldset>
     </form> <br> <br>
-    <a href="Admin_FuelTracking.html">
+    <a href="Admin_FuelTracking_F.html">
         <button type="button">Admin View</button>
     </a>
 
-    <script src="../asset/fuelTracking.js"></script>
+    <script src="../asset/fuelTracking_F.js"></script>
 </body>
 
 </html>

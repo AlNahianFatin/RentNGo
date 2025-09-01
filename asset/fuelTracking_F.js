@@ -97,7 +97,7 @@ function refuel() {
     refilledLitreInput.addEventListener("input", calculateFuel);
 
     let litre = document.createElement("label");
-    litre.innerHTML = " litre <br>";
+    litre.innerHTML = " litres <br>";
     litre.classList.add("font-itim");
 
     const cross = document.createElement("button");

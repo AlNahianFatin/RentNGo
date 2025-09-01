@@ -6,6 +6,9 @@ let dropLoc;
 
 let locations = [];
 
+let searchedC = false;
+let div;
+
 let mssg = document.createElement("label");
 mssg.id = "msg";
 mssg.style.position = "fixed";
@@ -105,3 +108,90 @@ function validatePickupDropoff(event) {
     event.preventDefault();
     return true;
 }
+
+function searchCustomer(event) {
+    event.preventDefault();
+
+    searchedC = true;
+
+    let customer = document.getElementById("Customer").value;
+
+    if (customer === "") {
+        mssg.textContent = "Please enter a customer Id or name first";
+        mssg.style.backgroundColor = "red";
+        document.body.appendChild(mssg);
+
+        setTimeout(() => {
+            mssg.remove();
+        }, 2000);
+        return false;
+    }
+
+    if (div)
+        div.remove();
+
+    div = document.createElement("div");
+    div.style.display = "flex";
+    div.style.flexDirection = "column";
+    div.style.alignItems = "center";
+    div.style.justifyContent = "center";
+    div.style.gap = "2vh";
+
+    let table = document.createElement("table");
+    table.border = "1";
+    table.style.marginTop = "15vh";
+    table.style.maxWidth = "80vw";
+    table.style.overflowX = "auto";
+    table.style.display = "block";
+
+    let thead = table.createTHead();
+    let headerRow = thead.insertRow();
+
+    let th1 = document.createElement("th");
+    th1.textContent = "Customer ID";
+    headerRow.appendChild(th1);
+
+    let th2 = document.createElement("th");
+    th2.textContent = "Customer Name";
+    headerRow.appendChild(th2);
+
+    let tbody = table.createTBody();
+    let dataRow = tbody.insertRow();
+
+    dataRow.insertCell().textContent = `fgh`;
+    dataRow.insertCell().textContent = `${customer}`;
+
+    div.appendChild(table);
+
+    let bttnGroup = document.createElement("div");
+    bttnGroup.style.display = "flex";
+    bttnGroup.style.gap = "2vw";
+
+    let clear = document.createElement("button");
+    clear.classList.add("button");
+    clear.innerText = "Clear";
+    clear.style.backgroundColor = "red";
+
+    clear.addEventListener("click", function () {
+        div.remove();
+    });
+
+    let confirm = document.createElement("button");
+    confirm.classList.add("button");
+    confirm.innerText = "Confirm";
+
+    confirm.addEventListener("click", function () {
+
+    });
+
+    bttnGroup.appendChild(clear);
+    bttnGroup.appendChild(confirm);
+    div.appendChild(bttnGroup);
+    document.body.appendChild(div);
+
+    customer = "";
+    document.getElementById("Customer").value = "";
+    if (mssg && document.body.contains(mssg))
+        mssg.remove();
+    return true;
+} 
