@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up</title>
-    <link rel="stylesheet" href="../Model/signupForm_N.css">
+    <link rel="stylesheet" href="../asset/signupForm.css">
 </head>
 
 <body>
@@ -18,11 +18,10 @@
     </header>
 
     <div class="sBackground"></div>
-
     <div class="signinContainer">
         <div class="sContent">
             <div class="sformContainer">
-                <form action="../Asset/signUpN.php" method="POST" onsubmit="return signupvalidation()">
+                  <form action="indexN.html" onsubmit="return signupvalidation()">
 
                     <h2>Sign Up</h2>
 
@@ -58,6 +57,16 @@
 
                     <button type="submit" class="signbtn" id="sbtn">Sign In</button><br>
                     <button type="button" class="clr" id="cbtn">Clear</button>
+
+                    <p class="ltag">Already have an account? <a href="indexN.html">Login</a></p>
+
+                    <p id="eFname"></p>
+                    <p id="eLname"></p>
+                    <p id="eEmail"></p>
+                    <p id="ePassword"></p>
+                    <p id="eCPassword"></p>
+                    <p id="emsg"></p>
+                    <p id="info">👉Name should be 3-5 characters long and Password should be at least 6 characters long👈</p>
                 </form>
 
             </div>
