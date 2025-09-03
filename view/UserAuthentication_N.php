@@ -12,7 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["authUser"] = $username;
         setcookie("authUser", $username, time() + 86400, "/"); // 1 day
         echo json_encode(["success" => true]);
-    } else {
+    } 
+    else {
         echo json_encode(["success" => false, "message" => "Invalid credentials"]);
     }
     exit;

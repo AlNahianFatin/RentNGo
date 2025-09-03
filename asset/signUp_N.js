@@ -21,17 +21,17 @@ function signupvalidation() {
 
     let valid = true;
 
-    if (Fname === ""||Lname === ""||semail === ""||epassword === ""||confirmPassword === "") {
+    if (Fname === "" || Lname === "" || semail === "" || epassword === "" || confirmPassword === "") {
         emsg.innerHTML = "Please fillup all the fields";
         valid = false;
-    } 
-    
+    }
+
     else if (Fname.length < 3 || Fname.length > 5) {
         emsg.innerHTML = "First Name must be between 3-5 characters";
         valid = false;
     }
 
-   else if (epassword.length < 6) {
+    else if (epassword.length < 6) {
         emsg.innerHTML = "Password must be at least 6 characters long";
         valid = false;
     }
@@ -46,22 +46,19 @@ function signupvalidation() {
     }
 
     window.location.href = "../view/indexN.html";
-    return false; 
+    return false;
 }
-document.addEventListener('DOMContentLoaded', function () {
-    let clrtBtn = document.getElementById("cbtn");
-    let user = document.getElementById("firstName");
+
+function clearAll() {
+    let fname = document.getElementById("firstName");
     let lname = document.getElementById("lastName");
     let eMail = document.getElementById("semail");
     let pass = document.getElementById("epassword");
     let cpass = document.getElementById("confirmPassword");
 
-    clrtBtn.addEventListener("click", function () {
-        user.value = "";  
-        lname.value = ""; 
-        eMail.value = ""; 
-        pass.value = "";   
-        cpass.value = "";
-
-    });
-});
+    fname.value = "";
+    lname.value = "";
+    eMail.value = "";
+    pass.value = "";
+    cpass.value = "";
+}

@@ -8,7 +8,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION["user"] = $username;
         header("Location: inventory_N.html");
         exit;
-    } else {
+    } 
+    else {
         echo "❌ Invalid Username or Password";
     }
 }
