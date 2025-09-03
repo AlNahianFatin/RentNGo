@@ -1,6 +1,6 @@
 <?php
 
-    header('location: view/indexN.html');
+    header('location: view/homePage_N.html');
     exit;
 
 ?>

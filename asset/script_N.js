@@ -8,44 +8,43 @@ function validationCheck(){
     eName.innerHTML=""
     ePass.innerHTML=""
 
-    if(name!==""||pass!==""){
-        window.location.href="../View/inventory.html";
-        return true;
-    }else if(name=="" ){
-        eName.innerHTML="Please enter Your Username first"
+    if(name==""||pass==""){
+        eName.innerHTML="Please enter Your Username or Password first"
         return false;
+    }
 
-    }else if(pass == ""){
-         ePass.innerHTML="Please enter Your Password first"
-         return false;
-    }else if(name.length >5||name.length <3){
+    else if(name.length >5||name.length <3){
         ePass.innerHTML=""
         eName.innerHTML="Username must be between 3-5 charecters"
         return false;
 
-    }else if(pass.length <6){
+    }
+    
+    else if(pass.length <6){
         eName.innerHTML=""
         ePass.innerHTML="Password must be at least 6 charecters long"
         return false;   
 
-    }else{
-        fetch("login.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: `username=${encodeURIComponent(name)}&password=${encodeURIComponent(pass)}`
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert("Login successfully");
-                window.location.href = "../View/inventory.html";
-            } else {
-                ePass.innerHTML = data.message || "Login failed";
-            }
-        })
-        .catch(() => {
-            ePass.innerHTML = "Server error";
-        });
-        return false;
+    }
+
+    if(name!==""||pass!==""){
+        window.location.href="../View/inventory.html";
+        return true;
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    let resetBtn = document.getElementById("rst");
+    let user = document.getElementById("username");
+    let pass = document.getElementById("password");
+    let eName = document.getElementById("eName");
+    let ePass = document.getElementById("ePass");
+
+    resetBtn.addEventListener("click", function () {
+        user.value = "";   
+        pass.value = "";   
+        eName.innerHTML = "";
+        ePass.innerHTML = "";
+    });
+});
+
