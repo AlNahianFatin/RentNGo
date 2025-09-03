@@ -1,61 +1,123 @@
 /* ===============================
-   Booking Page Styles
+   Booking Page Styles (Fixed + Consistent Inputs)
    =============================== */
 body {
   font-family: "Segoe UI", sans-serif;
   background: linear-gradient(to right, #56ccf2, #2f80ed);
-  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 form {
   background: #fff;
-  padding: 30px;
-  border-radius: 12px;
+  padding: 30px 25px;
+  border-radius: 16px;
   width: 100%;
-  max-width: 500px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  max-width: 480px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease;
+}
+form:hover {
+  transform: translateY(-3px);
 }
 
 h2 {
   text-align: center;
   margin-bottom: 20px;
   color: #2f80ed;
+  font-size: 1.6rem;
 }
 
 label {
-  font-weight: bold;
-  margin: 8px 0 5px;
+  font-weight: 600;
+  margin: 10px 0 6px;
   display: block;
+  color: #333;
 }
 
-input {
+/* ✅ Make all input & select boxes the same height */
+input,
+select {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 12px;
+  height: 45px;             /* same height for all */
+  padding: 0 12px;
+  margin-bottom: 16px;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  box-sizing: border-box;   /* keeps padding inside */
+  appearance: none;         /* removes browser quirks */
+}
+
+input:focus,
+select:focus {
+  border-color: #2f80ed;
+  box-shadow: 0 0 5px rgba(47, 128, 237, 0.3);
+  outline: none;
 }
 
 button {
   width: 100%;
-  padding: 12px;
-  background: #2f80ed;
-  color: #fff;
+  padding: 14px;
+  margin-top: 8px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
 }
 
-button:hover {
+button[type="submit"] {
+  background: #2f80ed;
+  color: #fff;
+}
+button[type="submit"]:hover {
   background: #1c5dd4;
+}
+button[type="submit"]:active {
+  transform: scale(0.98);
+}
+
+button[name="role"][value="user"] {
+  background: #27ae60;
+}
+button[name="role"][value="user"]:hover {
+  background: #1e874b;
+}
+
+button[name="role"][value="admin"] {
+  background: #eb5757;
+}
+button[name="role"][value="admin"]:hover {
+  background: #c0392b;
+}
+
+#priceEstimate {
+  text-align: center;
+  margin: 15px 0;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #27ae60;
 }
 
 .error {
-  color: red;
+  color: #eb5757;
   text-align: center;
   font-weight: bold;
+  margin-top: 12px;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  form {
+    padding: 20px;
+  }
+  h2 {
+    font-size: 1.3rem;
+  }
 }

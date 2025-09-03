@@ -1,60 +1,123 @@
 /* ===============================
-   Pricing Calculator Page Styles
+   Pricing Calculator Page Styles (Improved)
    =============================== */
 body {
   background: linear-gradient(135deg, #43cea2, #185a9d);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  margin: 0;
   font-family: "Segoe UI", sans-serif;
+  padding: 20px;
 }
 
 form {
   background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-  max-width: 550px;
+  padding: 30px 25px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
   width: 100%;
+  transition: transform 0.2s ease;
+}
+form:hover {
+  transform: translateY(-3px);
 }
 
 h2 {
   text-align: center;
   margin-bottom: 20px;
   color: #185a9d;
+  font-size: 1.6rem;
 }
 
 label {
   display: block;
-  margin: 8px 0 5px;
-  font-weight: bold;
+  margin: 10px 0 6px;
+  font-weight: 600;
+  color: #333;
 }
 
-input, select {
+/* ✅ Normalize inputs & selects */
+input,
+select {
   width: 100%;
-  padding: 10px;
+  height: 45px;              /* same size for all */
+  padding: 0 12px;
   border: 1px solid #bbb;
-  border-radius: 6px;
-  margin-bottom: 12px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  appearance: none;          /* removes browser quirks */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+input:focus,
+select:focus {
+  border-color: #185a9d;
+  box-shadow: 0 0 5px rgba(24, 90, 157, 0.3);
+  outline: none;
+}
+
+/* ===============================
+   Buttons
+   =============================== */
 button {
   width: 100%;
-  padding: 12px;
-  background: #43cea2;
-  color: white;
-  font-weight: bold;
+  padding: 14px;
+  margin-top: 8px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background 0.3s ease, transform 0.1s ease;
 }
 
-button:hover {
+/* Default calculate */
+button[type="submit"] {
+  background: #43cea2;
+  color: #fff;
+}
+button[type="submit"]:hover {
   background: #2e9b7d;
 }
+button[type="submit"]:active {
+  transform: scale(0.98);
+}
 
+/* User-specific */
+button[name="role"][value="user"] {
+  background: #27ae60;
+}
+button[name="role"][value="user"]:hover {
+  background: #1e874b;
+}
+
+/* Admin-specific */
+button[name="role"][value="admin"] {
+  background: #eb5757;
+}
+button[name="role"][value="admin"]:hover {
+  background: #c0392b;
+}
+
+/* Error message */
 .error {
-  color: red;
+  color: #eb5757;
   text-align: center;
+  font-weight: bold;
+  margin-top: 12px;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  form {
+    padding: 20px;
+  }
+  h2 {
+    font-size: 1.3rem;
+  }
 }

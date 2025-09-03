@@ -2,7 +2,6 @@ let form = document.getElementById("bookingForm");
 let errorMessage = document.getElementById("errorMessage");
 let priceDisplay = document.getElementById("priceEstimate");
 
-// ✅ Live price update
 function updatePrice() {
   let vehicle = document.getElementById("vehicleType").value;
   let start = document.getElementById("pickupDate").value;
@@ -17,12 +16,10 @@ function updatePrice() {
   }
 }
 
-// Trigger price calculation on changes
 ["vehicleType", "pickupDate", "returnDate"].forEach(id => {
   document.getElementById(id).addEventListener("change", updatePrice);
 });
 
-// ✅ Form validation
 form.addEventListener("submit", function (e) {
   e.preventDefault();
   errorMessage.textContent = "";
@@ -44,7 +41,6 @@ form.addEventListener("submit", function (e) {
     return;
   }
 
-  // Reset + redirect
   form.reset();
   priceDisplay.textContent = "";
   window.location.href = "PricingCalculatorM.html";

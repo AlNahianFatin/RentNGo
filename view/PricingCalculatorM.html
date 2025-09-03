@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pricing Calculator</title>
-<link rel="stylesheet" href="../Assets/CSS/pricingM.css" />
+<link rel="stylesheet" href="../asset/CSS/pricingM.css" />
 
 </head>
 <body>
-  <form id="pricingForm">
+  <form id="pricingForm" method="POST" action="pricingM.php">
     <h2>Pricing Calculator</h2>
 
     <label for="startDate">Start Date :</label>
@@ -31,11 +31,13 @@
     <input type="text" id="promoCode" />
 
     <button type="submit">Calculate Price</button>
+    <!-- <button type="admin" name="role" value="user">Calculate as User</button>
+    <button type="submit" name="role" value="admin">Calculate as Admin</button> -->
     <p id="errorMessage" class="error"></p>
   </form>
 
-  <!-- Load Model then Controller -->
-  <script src="../models/pricingM.js"></script>
-  <script src="../controllers/pricingControllerM.js"></script>
+  
+  <script src="../model/pricingM.js"></script>
+  <script src="../controller/pricingControllerM.js"></script>
 </body>
 </html>
