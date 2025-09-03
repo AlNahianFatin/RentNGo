@@ -117,7 +117,7 @@ function searchCustomer(event) {
     let customer = document.getElementById("Customer").value;
 
     if (customer === "") {
-        mssg.textContent = "Please enter a customer Id or name first";
+        mssg.textContent = "Please enter a customer Id first";
         mssg.style.backgroundColor = "red";
         document.body.appendChild(mssg);
 
@@ -174,6 +174,8 @@ function searchCustomer(event) {
 
     clear.addEventListener("click", function () {
         div.remove();
+        customer = "";
+        document.getElementById("Customer").value = "";
     });
 
     let confirm = document.createElement("button");

@@ -1,10 +1,44 @@
 <?php
-    session_start();
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $pickupFuel = $_POST["pickupFuel"] ?? "";
+    $dropoffFuel = $_POST["dropoffFuel"] ?? "";
+    $fuelRate = $_POST["fuelRate"] ?? "";
+    $refilled = $_POST["refilled"] ?? 0;
 
-    if(!isset($_COOKIE['status'])) {
-        header('location: index.php?error=sessionexpired');
+    $errors = [];
+
+    // if(!isset($_COOKIE['status'])) 
+    //    header('location: index.php?error=sessionexpired');
+
+    if ($pickupFuel === "" || !is_numeric($pickupFuel) || $pickupFuel < 0) {
+        $errors[] = "Enter a valid number for pickup fuel.";
+        header('location: Staff_FuelTracking_F.php?error=invalidPickupFuel');
     }
+
+    if ($dropoffFuel === "" || !is_numeric($dropoffFuel) || $dropoffFuel < 0) {
+        $errors[] = "Enter a valid number for dropoff fuel.";
+        header('location: Staff_FuelTracking_F.php?error=invalidDropoffFuel');
+    }
+
+    if ($dropoffFuel === "" || !is_numeric($fuelRate) || $fuelRate < 0) {
+        $errors[] = "Enter a valid fuel rate.";
+        header('location: Staff_FuelTracking_F.php?error=invalidDropoffFuel');
+    }
+
+    // if ($pickupFuel < $dropoffFuel && (!is_numeric($refilled) || $refilled <= 0)) {
+    //     $errors[] = "Enter a valid refill amount.";
+    // }
+
+    if (empty($errors)) {
+        // echo "Fuel details validated successfully.";
+    } else {
+        foreach ($errors as $err) {
+            echo "<p style='color:red;'>$err</p>";
+        }
+    }
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

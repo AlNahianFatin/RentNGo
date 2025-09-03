@@ -1,3 +1,28 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $pickupLocation = $_POST["pickup_location"] ?? "";
+    $dropoffLocation = $_POST["dropoff_location"] ?? "";
+
+    // if(!isset($_COOKIE['status'])) 
+    //    header('location: index.php?error=sessionExpired');
+
+    if (empty($pickupLocation)) {
+        echo "<p style='color:red;'>Please enter a pickup location first.</p>";
+        header('location: Customer_PickupLocation_F.php?error=invalidPickupLocatoion');
+    } 
+    else {
+        echo "Branch location added successfully.";
+    }
+    if (empty($dropoffLocation)) {
+        echo "<p style='color:red;'>Please enter a dropoff location first.</p>";
+        header('location: Customer_PickupLocation_F.php?error=invalidDropoffLocatoion');
+    } 
+    else {
+        echo "Branch location added successfully.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

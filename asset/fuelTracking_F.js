@@ -156,18 +156,6 @@ function validateFuel(event) {
     else
         refillnum = 0;
 
-    if ((!pNum || isNaN(pNum)) && (!dNum || isNaN(dNum))) {
-        refueled = false;
-        mssg.innerHTML = "Enter a valid number for pickup fuel";
-        mssg.style.backgroundColor = "red";
-        document.body.appendChild(mssg);
-
-        setTimeout(() => {
-            mssg.remove();
-        }, 2000);
-        event.preventDefault();
-        return false;
-    }
     if (!pNum || isNaN(pNum) || pNum < 0) {
         refueled = false;
         mssg.innerHTML = "Enter a valid number for pickup fuel";

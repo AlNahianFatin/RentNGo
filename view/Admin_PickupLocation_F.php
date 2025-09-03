@@ -1,3 +1,17 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $location = $_POST["location"] ?? "";
+    
+    if (empty($location)) {
+        echo "<p style='color:red;'>Please enter a pickup location first.</p>";
+        header('location: Admin_PickupLocation_F.php?error=invalidPickupLocatoion');
+    } 
+    else {
+        echo "Branch location added successfully.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +32,7 @@
         </div>
     </div>
     
-    <form action="" onsubmit="return validateLocation(event)">
+    <form action="Admin_PickupLocation_F.php" method="post" onsubmit="return validateLocation(event)">
         <fieldset>
             <legend>Add Pickup Locations</legend>
             <label for="location">Pickup Location:</label>
