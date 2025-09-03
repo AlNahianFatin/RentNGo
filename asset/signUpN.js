@@ -48,3 +48,20 @@ function signupvalidation() {
     window.location.href = "../view/indexN.html";
     return false; 
 }
+document.addEventListener('DOMContentLoaded', function () {
+    let clrtBtn = document.getElementById("cbtn");
+    let user = document.getElementById("firstName");
+    let lname = document.getElementById("lastName");
+    let eMail = document.getElementById("semail");
+    let pass = document.getElementById("epassword");
+    let cpass = document.getElementById("confirmPassword");
+
+    clrtBtn.addEventListener("click", function () {
+        user.value = "";  
+        lname.value = ""; 
+        eMail.value = ""; 
+        pass.value = "";   
+        cpass.value = "";
+
+    });
+});
