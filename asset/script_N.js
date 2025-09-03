@@ -28,7 +28,7 @@ function validationCheck(){
     }
 
     if(name!==""||pass!==""){
-        window.location.href="../View/inventory.html";
+        window.location.href="../view/inventory.html";
         return true;
     }
 }
