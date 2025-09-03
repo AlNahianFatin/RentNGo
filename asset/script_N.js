@@ -13,9 +13,9 @@ function validationCheck(){
         return false;
     }
 
-    else if(name.length >5||name.length <3){
+    else if(name.length <3){
         ePass.innerHTML=""
-        eName.innerHTML="Username must be between 3-5 charecters"
+        eName.innerHTML="Username at least 3 characters"
         return false;
 
     }
