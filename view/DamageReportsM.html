@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Damage Report</title>
-<link rel="stylesheet" href="../Assets/CSS/damageM.css" />
+<link rel="stylesheet" href="../asset/CSS/damageM.css" />
 
 </head>
 <body>
-  <form id="damageForm">
+  <form id="damageForm" method="POST" action="damageM.php">
     <h2>📝 Damage Report</h2>
 
     <label for="vehicleId">Vehicle ID :</label>
@@ -43,7 +43,7 @@
   </form>
 
   <!-- Load Model then Controller -->
-  <script src="../models/damageM.js"></script>
-  <script src="../controllers/damageControllerM.js"></script>
+  <script src="../model/damageM.js"></script>
+  <script src="../controller/damageControllerM.js"></script>
 </body>
 </html>
