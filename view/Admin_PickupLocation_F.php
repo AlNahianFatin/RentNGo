@@ -1,6 +1,9 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $location = $_POST["location"] ?? "";
+
+    // if(!isset($_COOKIE['status'])) 
+    //    header('location: index.php?error=sessionExpired');
     
     if (empty($location)) {
         echo "<p style='color:red;'>Please enter a pickup location first.</p>";

@@ -1,19 +1,25 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // if(!isset($_COOKIE['status'])) 
+// if(!isset($_COOKIE['status'])) 
     //    header('location: index.php?error=sessionExpired');
-}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin_FuelTracking</title>
+    <title>Admin_BookingData</title>
 
     <link rel="stylesheet" href="../asset/style_F.css">
+
+    <style>
+        td {
+            min-width: 23vh;
+        }
+    </style>
 </head>
+
 <body>
     <div class="header">
         <img src="../asset/RentNGo logo.png" class="logo" alt="RentNGo Logo">
@@ -23,21 +29,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
 
-    <table id="records">
+    <table id="records" style="width: auto; max-width: 100vw;">
         <thead>
-            <td class="left">Customer ID</td>
+            <td>Customer ID</td>
             <td>Customer Name</td>
+            <td> Booking Date</td>
             <td>Pickup Location</td>
             <td>Dropoff Location</td>
+            <td>Hours Rented</td>
+            <td>Car Rent</td>
             <td>Fuel Cost</td>
+            <td>Total Rent</td>
         </thead>
         <tbody></tbody>
     </table>
 
-    <a href="Staff_FuelTracking_F.php">
-        <button type="button">Staff View</button>
+    <a href="Customer_BookingData_F.html">
+        <button type="button">Customer View</button>
     </a>
 
-    <script src="../asset/fuelTracking_F.js"></script>
+    <div style="display: flex; justify-content: center; align-items: center;" >
+        <button onclick="">Download Record</button>
+    </div>
 </body>
+
 </html>

@@ -1,24 +1,16 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $customerID = $_POST["Customer"] ?? "";
-
-    $errors = [];
+    $customer = $_POST["Customer"] ?? "";
 
     // if(!isset($_COOKIE['status'])) 
     //    header('location: index.php?error=sessionExpired');
 
-    if ($customerID === "" || !is_numeric($customerID)) {
+    if ($customer === "" || !is_numeric($customer)) {
         $errors[] = "Enter a valid number for customer ID.";
         header('location: Staff_PickupLocation_F.php?error=invalidCustomerID');
     }
-
-    if (empty($errors)) {
-        // echo "Fuel details validated successfully.";
-    } 
     else {
-        foreach ($errors as $err) {
-            echo "<p style='color:red;'>$err</p>";
-        }
+        
     }
 }
 ?>

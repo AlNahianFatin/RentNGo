@@ -31,7 +31,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (empty($errors)) {
         // echo "Fuel details validated successfully.";
-    } else {
+    } 
+    else {
         foreach ($errors as $err) {
             echo "<p style='color:red;'>$err</p>";
         }

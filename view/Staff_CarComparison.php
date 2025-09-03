@@ -1,8 +1,6 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // if(!isset($_COOKIE['status'])) 
     //    header('location: index.php?error=sessionExpired');
-}
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin_FuelTracking</title>
+    <title>Staff_CarComparison</title>
 
     <link rel="stylesheet" href="../asset/style_F.css">
 </head>
@@ -23,21 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
 
-    <table id="records">
-        <thead>
-            <td class="left">Customer ID</td>
-            <td>Customer Name</td>
-            <td>Pickup Location</td>
-            <td>Dropoff Location</td>
-            <td>Fuel Cost</td>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <button style="margin-left: 90vw; margin-top: 2vh;" onclick="return addCar()">Add a Car</button>
 
-    <a href="Staff_FuelTracking_F.php">
-        <button type="button">Staff View</button>
-    </a>
-
-    <script src="../asset/fuelTracking_F.js"></script>
+    <script src="../asset/carComparison_F.js"></script>
 </body>
 </html>
