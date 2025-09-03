@@ -19,4 +19,21 @@ class Pricing {
     let rate = this.dailyRates[vehicleType] || 0;
     return days * rate;
   }
+
+  static validate(startDate, endDate, vehicleType) {
+    if (!startDate || !endDate || !vehicleType) {
+      return "❌ Please fill in all fields.";
+    }
+
+    let start = new Date(startDate);
+    let end = new Date(endDate);
+
+    if (isNaN(start) || isNaN(end)) {
+      return "❌ Invalid dates.";
+    }
+    if (end <= start) {
+      return "❌ End date must be after start date.";
+    }
+    return null; 
+  }
 }

@@ -4,7 +4,7 @@ class Booking {
     let ret = new Date(returnDate + "T" + returnTime);
     let now = new Date();
 
-    if (isNaN(pickup) || isNaN(ret)) {
+    if (isNaN(pickup) || isNaN(ret)) { // nan returns true if value is not a number
       return "Please fill in all date and time fields.";
     }
     if (pickup < now) {

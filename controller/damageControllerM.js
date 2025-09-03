@@ -1,7 +1,6 @@
 let form = document.getElementById("damageForm");
 let errorMessage = document.getElementById("errorMessage");
 
-// Preview Damage Photo
 document.getElementById("damagePhoto").addEventListener("change", function () {
   let preview = document.getElementById("photoPreview");
   if (this.files && this.files[0]) {
@@ -12,7 +11,6 @@ document.getElementById("damagePhoto").addEventListener("change", function () {
   }
 });
 
-// Preview Signature Photo
 document.getElementById("signaturePhoto").addEventListener("change", function () {
   let preview = document.getElementById("signaturePreview");
   if (this.files && this.files[0]) {
@@ -23,7 +21,6 @@ document.getElementById("signaturePhoto").addEventListener("change", function ()
   }
 });
 
-// Validation on submit
 form.addEventListener("submit", function (e) {
   e.preventDefault();
   errorMessage.textContent = "";
