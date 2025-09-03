@@ -2,6 +2,7 @@
 // if(!isset($_COOKIE['status'])) 
     //    header('location: index.php?error=sessionExpired');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
