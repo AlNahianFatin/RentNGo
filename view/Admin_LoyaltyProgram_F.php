@@ -1,6 +1,14 @@
 <?php
-// if(!isset($_COOKIE['status'])) 
-    //    header('location: index.php?error=sessionExpired');
+session_start();
+
+if(!isset($_SESSION['username'])) {
+    // header('location: ../index.php?error=sessionExpired');
+    // exit;
+}
+if(!isset($_SESSION['status'])) {
+    // header('location: ../index.php?error=invalidRequest');
+    // exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +43,7 @@
             <td class="left" style="border: none;">Reward Scheme</td>
             <td style="border: none;">Points Required</td>
             <td style="border: none;">Amenities</td>
+            <td style="border: none;">Amount</td>
             <td style="border: none;">Activate/Deactivate</td>
             <td style="border: none;">Edit</td>
             <td style="border: none;">Delete</td>

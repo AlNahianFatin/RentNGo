@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer_LoyaltyProgram</title>
+    <title>Staff_LoyaltyProgram</title>
 
     <link rel="stylesheet" href="../asset/style_F.css">
 </head>
@@ -66,6 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </script>
         <?php endif;?>
 
+
     <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; margin-top: 10vh;">
         <img src="../asset/points.png" class="loyaltyPoints" alt="Points icon" style="width: 40px;">
         <label class="font-itim">Loyalty Points: 0</label>
@@ -90,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="submit" name="submit" value="Apply">
     </form> <br> <br>
 
-    <a href="Admin_LoyaltyProgram_F.html">
+    <a href="Admin_LoyaltyProgram_F.php">
         <button type="button">Admin View</button>
     </a>
 

@@ -23,12 +23,14 @@ let rowRent = table.insertRow();
 let rowSeats = table.insertRow();
 let rowMileage = table.insertRow();
 let rowCross = table.insertRow();
+let rowBook = table.insertRow();
 
 rowCarName.insertCell().textContent = "Car Name & Model";
 rowRent.insertCell().textContent = "Rent (tk)";
 rowSeats.insertCell().textContent = "No. of Seats";
 rowMileage.insertCell().textContent = "Mileage (km)";
 rowCross.insertCell().innerHTML = "";
+rowBook.insertCell().innerHTML = "";
 
 function createCrossButton(colIndex) {
     const cross = document.createElement("button");
@@ -51,6 +53,25 @@ function createCrossButton(colIndex) {
     return cross;
 }
 
+function createBookButton() {
+    const book = document.createElement("button");
+    book.innerHTML = "Book";
+    book.style.position = "relative";
+    book.style.padding = "5px 8px";
+    book.style.fontSize = "16px";
+    book.style.fontWeight = "bold";
+    book.style.border = "0px";
+    book.style.transition = "transform 0.3s ease, color 0.3s ease";
+    book.style.cursor = "pointer";
+
+    book.addEventListener("click", function () {
+        let id = 123;
+        window.location.href = "../controller/CarComparisonSelected_F.php?id=" + encodeURIComponent(id);
+
+    });
+    return book;
+}
+
 function populateTable() {
     let colIndex = rowCarName.cells.length;
 
@@ -59,6 +80,7 @@ function populateTable() {
     rowSeats.insertCell().textContent = `${4 + cars}`;
     rowMileage.insertCell().textContent = `${12 + cars * 2} km/h`;
     rowCross.insertCell().appendChild(createCrossButton(colIndex));
+    rowBook.insertCell().appendChild(createBookButton(colIndex));
 
     document.body.appendChild(table);
 }
@@ -67,9 +89,10 @@ function addCar() {
     if (cars < 3) {
         populateTable();
         cars++;
+        validateCarCount(cars + 1);
     }
     else {
-        mssg.textContent = "Sorry! cannot compare more than 3 cars at a time";
+        mssg.textContent = "Sorry! Cannot compare more than 3 cars at a time";
         mssg.style.backgroundColor = "red";
         document.body.appendChild(mssg);
 

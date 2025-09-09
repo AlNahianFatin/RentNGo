@@ -52,7 +52,7 @@ function clearTexts() {
         mssg.remove();
 }
 
-function validateLocation(event) {
+function validateLocation() {
     branchLocation = document.getElementById("location").value.trim();
 
     if (branchLocation === "") {
@@ -75,11 +75,10 @@ function validateLocation(event) {
     locations.push({ id: branchId++, loc: branchLocation });
 
     clearTexts();
-    event.preventDefault();
     return true;
 }
 
-function validatePickupDropoff(event) {
+function validatePickupDropoff() {
     pickLoc = document.getElementById("pickup").value;
     dropLoc = document.getElementById("dropoff").value;
 
@@ -105,19 +104,16 @@ function validatePickupDropoff(event) {
     }
 
     clearTexts();
-    event.preventDefault();
     return true;
 }
 
-function searchCustomer(event) {
-    event.preventDefault();
-
+function searchCustomer() {
     searchedC = true;
 
     let customer = document.getElementById("Customer").value;
 
     if (customer === "") {
-        mssg.textContent = "Please enter a customer Id first";
+        mssg.textContent = "Please enter a customer name first";
         mssg.style.backgroundColor = "red";
         document.body.appendChild(mssg);
 
@@ -183,6 +179,8 @@ function searchCustomer(event) {
     confirm.innerText = "Confirm";
 
     confirm.addEventListener("click", function () {
+        let id = 123;
+        window.location.href = "../controller/PickupLocationSearchCustomer_F.php?id=" + encodeURIComponent(id);
 
     });
 

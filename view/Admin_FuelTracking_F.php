@@ -1,7 +1,13 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // if(!isset($_COOKIE['status'])) 
-    //    header('location: index.php?error=sessionExpired');
+session_start();
+
+if(!isset($_SESSION['username'])) {
+    // header('location: ../index.php?error=sessionExpired');
+    // exit;
+}
+if(!isset($_SESSION['status'])) {
+    // header('location: ../index.php?error=invalidRequest');
+    // exit;
 }
 ?>
 
@@ -23,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
 
-    <table id="records">
+    <table id="records" style="margin: 10vh 0">
         <thead>
             <td class="left">Customer ID</td>
             <td>Customer Name</td>

@@ -1,17 +1,25 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['username'])) {
+    // header('location: ../index.php?error=sessionExpired');
+    // exit;
+}
+if(!isset($_SESSION['status'])) {
+    // header('location: ../index.php?error=invalidRequest');
+    // exit;
+}
+
+$message = "";
+$messageColor = "red"; 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $customer = $_POST["Customer"] ?? "";
+    $pickupLocation = isset($_POST["pickup_location"]) ? $_POST["pickup_location"] : "";
+    $dropoffLocation = isset($_POST["dropoff_location"]) ? $_POST["dropoff_location"] : "";
 
-    // if(!isset($_COOKIE['status'])) 
-    //    header('location: index.php?error=sessionExpired');
-
-    if ($customer === "" || !is_numeric($customer)) {
-        $errors[] = "Enter a valid number for customer ID.";
-        header('location: Staff_PickupLocation_F.php?error=invalidCustomerID');
-    }
-    else {
-        
-    }
+    if (empty($pickupLocation)) 
+        $message = "Please select a pickup location first.";
+    else if (empty($dropoffLocation)) 
+        $message = "Please select a dropoff location first."; 
 }
 ?>
 
@@ -35,14 +43,62 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
 
-    <form action="Staff_PickupLocation.php" method="post" onsubmit="return searchCustomer(event)" style=" flex-direction: column;">
+    <?php if (!empty($message)): ?>
+            <div id="msg" style="
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                color: white;
+                opacity: 0.9;
+                padding: 10px 20px;
+                border: 1px solid black;
+                border-radius: 6px;
+                font-family: Inika;
+                z-index: 9999;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.6);
+                background-color: <?= $messageColor ?>;
+            ">
+                <?= htmlspecialchars($message) ?>
+            </div>
+            <script>
+                setTimeout(() => {
+                    const msg = document.getElementById('msg');
+                    if (msg) msg.remove();
+                }, 2000);
+            </script>
+        <?php endif;?>
+
+    <div style="margin-top: 180px; display: flex; align-items: center; justify-content: center; text-align: center; gap: 20px;">
+        <label for="search" class="font-itim">Search by airport/city:</label>
+        <input type="text" name="search" class="font-itim" style="border-radius: 10px;" placeholder="🔍Search">
+    </div>
+
+    <form action="" method="post" onsubmit="return validatePickupDropoff()" style=" flex-direction: column;">
         <div class="row">
-            <label for="Customer">Enter Customer ID:</label>
-            <input type="text" id="Customer" class="font-itim" name="Customer" style="border-radius: 10px;"
-                placeholder="Customer ID"> <br> <br>
-            <input type="submit" name="submit" value="Search">
+            <label for="pickup_location">Pickup Location:</label>
+            <select id="pickup" name="pickup_location">
+                <option value="">Choose a pickup point</option>
+                <option value="khilKhet">Khilkhet</option>
+                <option value="Jamuna Future Park">Jamuna Future Park</option>
+            </select>
         </div>
+
+        <div class="row">
+            <label for="dropoff_location">Dropoff Location:</label>
+            <select id="dropoff" name="dropoff_location">
+                <option value="">Choose a dropoff point</option>
+                <option value="khilKhet">Khilkhet</option>
+                <option value="Jamuna Future Park">Jamuna Future Park</option>
+            </select>
+        </div>
+        <input type="submit" style="padding: 3px 5px;" name="submit" value="Confirm">
     </form>
+
+
+    <a href="Admin_PickupLocation_F.php">
+        <button type="button">Admin View</button>
+    </a>
 
     <script src="../asset/pickupLocations_F.js"></script>
 </body>

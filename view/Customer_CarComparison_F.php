@@ -1,6 +1,14 @@
 <?php
-// if(!isset($_COOKIE['status'])) 
-    //    header('location: index.php?error=sessionExpired');
+session_start();
+
+if(!isset($_SESSION['username'])) {
+    // header('location: ../index.php?error=sessionExpired');
+    // exit;
+}
+if(!isset($_SESSION['status'])) {
+    // header('location: ../index.php?error=invalidRequest');
+    // exit;
+}
 ?>
 
 <!DOCTYPE html>

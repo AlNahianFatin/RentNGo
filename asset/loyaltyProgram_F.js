@@ -13,12 +13,11 @@ mssg.style.fontFamily = "Inika";
 mssg.style.zIndex = "9999";
 mssg.style.boxShadow = "0 5px 10px rgba(0,0,0,0.6)";
 
-function validateAddScheme(event) {
-    // event.preventDefault();
-
+function validateAddScheme() {
     let reward = document.getElementById("scheme").value;
     let points = Number(document.getElementById("points").value);
     let type = document.getElementById("type").value;
+    let amount = Number(document.getElementById("amount").value);
 
     if(reward == "") {
         mssg.textContent = "Please enter a reward scheme first";
@@ -31,7 +30,7 @@ function validateAddScheme(event) {
         return false;
     }
     
-    if(!points || isNaN(points) || points < 0) {
+    if(!points || isNaN(points) || points <= 0) {
         mssg.textContent = "Please enter a valid reward point first";
         mssg.style.backgroundColor = "red";
         document.body.appendChild(mssg);
@@ -41,9 +40,30 @@ function validateAddScheme(event) {
         }, 2000);
         return false;
     }
-
+    
     if(type == "") {
         mssg.textContent = "Please select a amentities type first";
+        mssg.style.backgroundColor = "red";
+        document.body.appendChild(mssg);
+        
+        setTimeout(() => {
+            mssg.remove();
+        }, 2000);
+        return false;
+    }
+    
+    if(!amount || isNaN(amount) || amount <= 0) {
+        mssg.textContent = "Please enter a valid loyalty amount first";
+        mssg.style.backgroundColor = "red";
+        document.body.appendChild(mssg);
+
+        setTimeout(() => {
+            mssg.remove();
+        }, 2000);
+        return false;
+    }
+    if(type ="rentPercent" && amount > 100) {
+        mssg.textContent = "Loyalty amount cannot be more than 100%";
         mssg.style.backgroundColor = "red";
         document.body.appendChild(mssg);
 
@@ -55,8 +75,7 @@ function validateAddScheme(event) {
     return true;
 }
 
-function validateScheme(event) {
-    // event.preventDefault();
+function validateScheme() {
     let scheme = document.getElementById("scheme").value;
 
     if(scheme == "") {

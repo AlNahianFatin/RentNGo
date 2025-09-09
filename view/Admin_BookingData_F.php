@@ -1,6 +1,14 @@
 <?php
-// if(!isset($_COOKIE['status'])) 
-    //    header('location: index.php?error=sessionExpired');
+session_start();
+
+if(!isset($_SESSION['username'])) {
+    // header('location: ../index.php?error=sessionExpired');
+    // exit;
+}
+if(!isset($_SESSION['status'])) {
+    // header('location: ../index.php?error=invalidRequest');
+    // exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -29,22 +37,25 @@
         </div>
     </div>
 
-    <table id="records" style="width: auto; max-width: 100vw;">
+    <table id="records" style="width: auto; max-width: 100vw; margin: 10vh 0">
         <thead>
-            <td>Customer ID</td>
-            <td>Customer Name</td>
-            <td> Booking Date</td>
-            <td>Pickup Location</td>
-            <td>Dropoff Location</td>
-            <td>Hours Rented</td>
-            <td>Car Rent</td>
-            <td>Fuel Cost</td>
-            <td>Total Rent</td>
+            <tr>
+                <th>Customer ID</th>
+                <th>Customer Name</th>
+                <th>Booking Date</th>
+                <th>Pickup Location</th>
+                <th>Dropoff Location</th>
+                <th>Hours Rented</th>
+                <th>Car Rent</th>
+                <th>Fuel Cost</th>
+                <th>Total Rent</th>
+            </tr>
         </thead>
+
         <tbody></tbody>
     </table>
 
-    <a href="Customer_BookingData_F.html">
+    <a href="Customer_BookingData_F.php">
         <button type="button">Customer View</button>
     </a>
 

@@ -1,6 +1,14 @@
 <?php
-// if(!isset($_COOKIE['status'])) 
-    //    header('location: index.php?error=sessionExpired');
+session_start();
+
+if(!isset($_SESSION['username'])) {
+    // header('location: ../index.php?error=sessionExpired');
+    // exit;
+}
+if(!isset($_SESSION['status'])) {
+    // header('location: ../index.php?error=invalidRequest');
+    // exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +35,7 @@
         </div>
     </div>
 
-    <table id="records" style="width: auto; max-width: 100vw;">
+    <table id="records" style="width: auto; max-width: 100vw; margin: 10vh 0">
         <thead>
             <td>Booking Date</td>
             <td>Pickup Location</td>
@@ -40,7 +48,7 @@
         <tbody></tbody>
     </table>
 
-    <a href="Admin_BookingData_F.html">
+    <a href="Admin_BookingData_F.php">
         <button type="button">Admin View</button>
     </a>
 </body>

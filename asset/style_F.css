@@ -71,6 +71,10 @@ form {
     font-size: 25px;
 }
 
+fieldset {
+    border-radius: 20px;
+}
+
 form .row {
     display: flex;
     align-items: center;
@@ -111,6 +115,7 @@ input[type="submit"] {
     font-size: 20px;
     padding: 3px 5px;
     background-color: #eba923;
+    cursor: pointer;
 }
 
 input[type="submit"]:hover {
@@ -118,6 +123,7 @@ input[type="submit"]:hover {
     font-weight: bold;
     box-shadow: 2px 6px 12px black;
     transition: transform 0.1s ease, background-color 0.1s ease;
+    cursor: pointer;
 }
 
 button {
@@ -125,6 +131,7 @@ button {
     font-size: 20px;
     padding: 3px 5px;
     background-color: #eba923;
+    cursor: pointer;
 }
 
 button:hover {
@@ -132,6 +139,7 @@ button:hover {
     font-weight: bold;
     box-shadow: 2px 6px 12px black;
     transition: transform 0.1s ease, background-color 0.1s ease;
+    cursor: pointer;
 }
 
 select {

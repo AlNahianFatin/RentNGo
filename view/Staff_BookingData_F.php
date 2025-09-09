@@ -1,6 +1,14 @@
 <?php
-// if(!isset($_COOKIE['status'])) 
-    //    header('location: index.php?error=sessionExpired');
+session_start();
+
+if(!isset($_SESSION['username'])) {
+    // header('location: ../index.php?error=sessionExpired');
+    // exit;
+}
+if(!isset($_SESSION['status'])) {
+    // header('location: ../index.php?error=invalidRequest');
+    // exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +25,18 @@
         td {
             min-width: 23vh;
         }
+
+        .row {
+            font-family: Itim;
+            font-size: 30px;
+            margin-top: 17vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: auto;
+            gap: 2vw;
+        }
     </style>
 </head>
 
@@ -29,11 +49,18 @@
         </div>
     </div>
 
-    <table id="records" style="width: auto; max-width: 100vw;">
+    <div class="row">
+        <label for="Customer">Enter Customer Name:</label>
+        <input type="text" id="Customer" class="font-itim" name="Customer" style="border-radius: 10px;"
+            placeholder="Customer Name"> <br> <br>
+        <button type="button" name="search" onclick="searchCustomer()">Search</button>
+    </div>
+
+    <table id="records" style="width: auto; max-width: 100vw; margin: 10vh 0">
         <thead>
             <td>Customer ID</td>
             <td>Customer Name</td>
-            <td> Booking Date</td>
+            <td>Booking Date</td>
             <td>Pickup Location</td>
             <td>Dropoff Location</td>
             <td>Hours Rented</td>
@@ -44,9 +71,14 @@
         <tbody></tbody>
     </table>
 
-    <a href="Customer_BookingData_F.html">
+    <a href="Customer_BookingData_F.php">
         <button type="button">Customer View</button>
     </a>
+    <a href="Admin_BookingData_F.php">
+        <button type="button">Admin View</button>
+    </a>
+
+    <script src="../asset/bookingData_F.js"></script>
 </body>
 
 </html>

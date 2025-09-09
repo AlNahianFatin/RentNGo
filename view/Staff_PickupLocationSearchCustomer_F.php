@@ -9,15 +9,6 @@ if(!isset($_SESSION['status'])) {
     // header('location: ../index.php?error=invalidRequest');
     // exit;
 }
-
-$message = "";
-$messageColor = "red"; 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $location = isset($_POST["location"]) ? $_POST["location"] : "";
-    
-    if (empty($location)) 
-        $message = "Please enter a pickup location first.";
-}
 ?>
 
 <!DOCTYPE html>
@@ -26,9 +17,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin_PickupLocation</title>
+    <title>Staff_PickupLocationSearchCustomer</title>
 
     <link rel="stylesheet" href="../asset/style_F.css">
+    <style>
+        .row {
+            font-family: Itim;
+            font-size: 30px;
+            margin-top: 17vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            width: auto;
+            gap: 2vw;
+        }
+    </style>
 </head>
 
 <body>
@@ -65,27 +69,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 }, 2000);
             </script>
         <?php endif;?>
-    
-    <form action="Admin_PickupLocation_F.php" method="post" onsubmit="return validateLocation()">
-        <fieldset>
-            <legend>Add Pickup Locations</legend>
-            <label for="location">Pickup Location:</label>
-            <input type="text" id="location" class="font-itim" name="location" style="border-radius: 10px;" placeholder="Enter a Branch Location"> <br> <br>
-            <input type="submit" name="submit" value="Add">
-        </fieldset>
-    </form> <br> <br>
 
-    <table id="records">
-        <thead>
-            <td class="left">Branch ID</td>
-            <td>Branch Locations</td>
-        </thead>
-        <tbody></tbody>
-    </table>
-
-    <a href="Customer_PickupLocation_F.php">
-        <button type="button">Customer View</button>
-    </a>
+        <div class="row">
+            <label for="Customer">Enter Customer Name:</label>
+            <input type="text" id="Customer" class="font-itim" name="Customer" style="border-radius: 10px;"
+                placeholder="Customer Name"> <br> <br>
+            <button type="button" name="search" onclick="searchCustomer()">Search</button>
+        </div>
 
     <script src="../asset/pickupLocations_F.js"></script>
 </body>
