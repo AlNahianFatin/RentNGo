@@ -3,7 +3,7 @@ function customerLogout(event) {
    var confirmBox = document.getElementById('confirmBox');
    var okBtn = document.getElementById('okBtn');
    var cnclBtn = document.getElementById('cnclBtn');
-   var editBtn = document.getElementById('edit');
+   // var editBtn = document.getElementById('edit');
    
    logoutBtn.addEventListener("click", function () {
       confirmBox.style.display = 'block';
@@ -17,9 +17,9 @@ function customerLogout(event) {
       confirmBox.style.display = 'none';
    });
    
-   editBtn.addEventListener("click", function () {
-      window.location.href = '../view/edit_N.html';
-   });
+   // editBtn.addEventListener("click", function () {
+   //    window.location.href = '../view/CustomerProfileUpdate_N.html';
+   // });
    
 }
 
