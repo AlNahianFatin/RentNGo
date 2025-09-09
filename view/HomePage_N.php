@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($username === "admin" && $password === "123456") {
         $_SESSION["user"] = $username;
-        header("Location: inventory_N.html");
+        header("Location: CustomerInventory_N.html");
         exit;
     } 
     else {
