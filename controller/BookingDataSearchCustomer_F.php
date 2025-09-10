@@ -6,11 +6,14 @@ header('Content-Type: application/json');
 
 $customer = $_GET['customer'] ?? '';
 if ($customer === '') {
-    echo json_encode([]);
+    $records = getAllRentRecords();
+    echo json_encode($records);
     exit;
 }
 
 $records = getRentRecordByCName($customer);
-if (!is_array($records)) $records = [];
+
+if (!is_array($records)) 
+    $records = [];
 
 echo json_encode($records);

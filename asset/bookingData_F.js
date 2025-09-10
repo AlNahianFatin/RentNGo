@@ -20,17 +20,6 @@ function searchCustomer() {
 
     let customer = document.getElementById("Customer").value.trim();
 
-    // if (customer === "") {
-    //     mssg.textContent = "Please enter a customer name first";
-    //     mssg.style.backgroundColor = "red";
-    //     document.body.appendChild(mssg);
-
-    //     setTimeout(() => {
-    //         mssg.remove();
-    //     }, 2000);
-    //     return false;
-    // }
-
     fetch(`../controller/BookingDataSearchCustomer_F.php?customer=${encodeURIComponent(customer)}`)
         .then(response => response.json())
         .then(data => {
