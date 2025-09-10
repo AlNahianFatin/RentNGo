@@ -10,6 +10,7 @@ if(!isset($_SESSION['status'])) {
     // exit;
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,6 +20,11 @@ if(!isset($_SESSION['status'])) {
     <title>Admin_LoyaltyProgram</title>
 
     <link rel="stylesheet" href="../asset/style_F.css">
+    <style>
+        td {
+            min-width: 13vw;
+        }
+        </style>
 </head>
 
 <body>
@@ -35,18 +41,18 @@ if(!isset($_SESSION['status'])) {
         <label class="font-itim">Loyalty Program Management</label>
     </div><br>
 
-    <table style="border: none; border-collapse: collapse;">
+    <table style="border: 1; border-collapse: collapse;">
         <thead>
-            <td style="border: none; font-size: 30px;" colspan="6">Reward Catalog</td>
+            <td style="border: 1; font-size: 30px;" colspan="7">Reward Catalog</td>
         </thead>
-        <thead style="border: none;">
-            <td class="left" style="border: none;">Reward Scheme</td>
-            <td style="border: none;">Points Required</td>
-            <td style="border: none;">Amenities</td>
-            <td style="border: none;">Amount</td>
-            <td style="border: none;">Activate/Deactivate</td>
-            <td style="border: none;">Edit</td>
-            <td style="border: none;">Delete</td>
+        <thead style="border: 1;">
+            <td class="left" style="border: 1;">Reward Scheme</td>
+            <td style="border: 1;">Points Required</td>
+            <td style="border: 1;">Amenities</td>
+            <td style="border: 1;">Amount</td>
+            <td style="border: 1;">Activate/Deactivate</td>
+            <td style="border: 1;">Edit</td>
+            <td style="border: 1;">Delete</td>
         </thead>
         <tbody></tbody>
     </table><br><br><br>

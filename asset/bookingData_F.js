@@ -19,38 +19,51 @@ function searchCustomer() {
     searchedC = true;
 
     let customer = document.getElementById("Customer").value.trim();
+    let table = document.getElementById("records");
+    let tbody = table.querySelector("tbody");
+    tbody.innerHTML = "";
 
-    fetch(`../controller/BookingDataSearchCustomer_F.php?customer=${encodeURIComponent(customer)}`)
-        .then(response => response.json())
-        .then(data => {
-            let table = document.getElementById("records");
-            let tbody = table.querySelector("tbody");
-            tbody.innerHTML = "";
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `../controller/BookingDataSearchCustomer_F.php?customer=${encodeURIComponent(customer)}`, true);
 
-            if (data.length === 0) {
-                let row = tbody.insertRow();
-                let cell = row.insertCell();
-                cell.colSpan = 11;
-                cell.textContent = "No records found";
-                return;
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) { 
+            if (xhr.status === 200) {
+                try {
+                    let data = JSON.parse(xhr.responseText);
+
+                    if (data.length === 0) {
+                        let row = tbody.insertRow();
+                        let cell = row.insertCell();
+                        cell.colSpan = 11;
+                        cell.textContent = "No records found";
+                        return;
+                    }
+
+                    data.forEach(record => {
+                        let row = tbody.insertRow();
+                        row.insertCell().textContent = record.cname;
+                        row.insertCell().textContent = record.bdate;
+                        row.insertCell().textContent = record.plocation;
+                        row.insertCell().textContent = record.dlocation;
+                        row.insertCell().textContent = record.renthours;
+                        row.insertCell().textContent = record.crent;
+                        row.insertCell().textContent = record.fcost;
+                        row.insertCell().textContent = record.trent;
+                        row.insertCell().textContent = record.loyalty !== null ? record.loyalty : "---";
+                        row.insertCell().textContent = record.frent;
+                        row.insertCell().textContent = record.pstatus == 1 ? "Paid" : "Pending";
+                    });
+                } catch (err) {
+                    console.error("Error parsing JSON:", err);
+                }
+            } else {
+                console.error("Error fetching data:", xhr.status, xhr.statusText);
             }
+        }
+    };
 
-            data.forEach(record => {
-                let row = tbody.insertRow();
-                row.insertCell().textContent = record.cname;
-                row.insertCell().textContent = record.bdate;
-                row.insertCell().textContent = record.plocation;
-                row.insertCell().textContent = record.dlocation;
-                row.insertCell().textContent = record.renthours;
-                row.insertCell().textContent = record.crent;
-                row.insertCell().textContent = record.fcost;
-                row.insertCell().textContent = record.trent;
-                row.insertCell().textContent = record.loyalty !== null ? record.loyalty : "---";
-                row.insertCell().textContent = record.frent;
-                row.insertCell().textContent = record.pstatus == 1 ? "Paid" : "Pending";
-            });
-        })
-        .catch(error => console.error("Error fetching data:", error));
+    xhr.send()
 
     if (mssg && document.body.contains(mssg))
         mssg.remove();
@@ -63,5 +76,5 @@ customerInput.addEventListener("input", () => {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
         searchCustomer();
-    }, 200); 
+    }, 200);
 });

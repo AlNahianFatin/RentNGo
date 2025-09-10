@@ -10,13 +10,21 @@ if(!isset($_SESSION['status'])) {
     // exit;
 }
 
+if(!isset($_COOKIE['username'])) {
+    // header('location: ../index.php?error=sessionExpired');
+    // exit;
+}
+if(!isset($_COOKIE['status'])) {
+    // header('location: ../index.php?error=invalidRequest');
+    // exit;
+}
+
 require_once('../model/rentModel.php');
 $records = getAllRentRecords();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +32,7 @@ $records = getAllRentRecords();
 
     <link rel="stylesheet" href="../asset/style_F.css">
 
-    <style>
+    <style>        
         td {
             min-width: 13vw;
         }
@@ -53,7 +61,7 @@ $records = getAllRentRecords();
     </div>
 
     <div class="row">
-        <label for="Customer">Enter Customer Name:</label>
+        <label for="Customer">Search Customer:</label>
         <input type="text" id="Customer" class="font-itim" name="Customer" style="border-radius: 10px;"
             placeholder="Customer Name"> <br> <br>
     </div>

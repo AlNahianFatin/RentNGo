@@ -10,6 +10,7 @@ body {
     font-size: 16px;
     line-height: 1.5;
     background-color: antiquewhite;
+    min-width: 100vw;    
     width: max-content;
 }
 

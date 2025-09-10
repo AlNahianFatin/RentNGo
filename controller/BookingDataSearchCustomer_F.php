@@ -4,14 +4,14 @@ require_once('../model/rentModel.php');
 
 header('Content-Type: application/json');
 
-$customer = $_GET['customer'] ?? '';
+$customer = $_REQUEST['customer'] ?? '';
 if ($customer === '') {
     $records = getAllRentRecords();
     echo json_encode($records);
     exit;
 }
 
-$records = getRentRecordByCName($customer);
+$records = searchRentRecordByCName($customer);
 
 if (!is_array($records)) 
     $records = [];

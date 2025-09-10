@@ -13,7 +13,7 @@ if(!isset($_SESSION['status'])) {
 $message = "";
 $messageColor = "red"; 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $scheme = isset($_POST["scheme"]) ? floatval($_POST["scheme"]) : "";
+    $scheme = isset($_POST["scheme"]) ? $_POST["scheme"] : "";
     
     if (empty($scheme)) 
         $message = "Please enter a reward scheme first.";
@@ -90,7 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <input type="submit" name="submit" value="Apply">
     </form> <br> <br>
 
-    <a href="Admin_LoyaltyProgram_F.html">
+    <a href="Admin_LoyaltyProgram_F.php">
         <button type="button">Admin View</button>
     </a>
 
