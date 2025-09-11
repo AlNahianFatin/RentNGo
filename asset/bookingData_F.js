@@ -1,5 +1,3 @@
-let searchedC = false;
-
 let mssg = document.createElement("label");
 mssg.id = "msg";
 mssg.style.position = "fixed";
@@ -16,8 +14,6 @@ mssg.style.zIndex = "9999";
 mssg.style.boxShadow = "0 5px 10px rgba(0,0,0,0.6)";
 
 function searchCustomer() {
-    searchedC = true;
-
     let customer = document.getElementById("Customer").value.trim();
     let table = document.getElementById("records");
     let tbody = table.querySelector("tbody");
@@ -63,11 +59,11 @@ function searchCustomer() {
         }
     };
 
-    xhr.send()
+    xhr.send();
 
     if (mssg && document.body.contains(mssg))
         mssg.remove();
-    return true;
+    // return true;
 }
 
 let debounceTimer;

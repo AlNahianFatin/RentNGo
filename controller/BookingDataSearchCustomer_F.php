@@ -4,6 +4,7 @@ require_once('../model/rentModel.php');
 
 header('Content-Type: application/json');
 
+$records = [];
 $customer = $_REQUEST['customer'] ?? '';
 if ($customer === '') {
     $records = getAllRentRecords();
