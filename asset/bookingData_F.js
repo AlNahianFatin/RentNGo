@@ -20,8 +20,8 @@ function searchCustomer() {
     tbody.innerHTML = "";
 
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", `../controller/BookingDataSearchCustomer_F.php`, true);
-    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    xhr.open("GET", `../controller/BookingDataSearchCustomer_F.php?customer=${encodeURIComponent(customer)}`, true);
+    xhr.send();
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) { 
@@ -60,8 +60,6 @@ function searchCustomer() {
         }
     };
 
-    xhr.send(`customer=${encodeURIComponent(customer)}`);
-
     if (mssg && document.body.contains(mssg))
         mssg.remove();
     // return true;
@@ -75,3 +73,8 @@ customerInput.addEventListener("input", () => {
         searchCustomer();
     }, 200);
 });
+
+function downloadPDF() {
+    let customer = document.getElementById("Customer").value.trim();
+    window.open(`../controller/DownloadBookingData_F.php?customer=${encodeURIComponent(customer)}`, '_blank');
+}

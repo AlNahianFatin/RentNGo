@@ -108,7 +108,7 @@ $records = getAllRentRecords();
     </table>
     
     <div style="display: flex; justify-content: center; align-items: center;" >
-        <button onclick="">Download Record</button>
+        <button onclick="downloadPDF()">Download Record</button>
     </div>
 
     <a href="Staff_BookingData_F.php">

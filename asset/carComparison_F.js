@@ -94,9 +94,9 @@ function populateTable(carID) {
     let colIndex = rowCarBrand.cells.length;
     
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", `../controller/CarComparisonCompareCar_F.php`, true);
-    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-    
+    xhr.open("GET", `../controller/CarComparisonCompareCar_F.php?car=${encodeURIComponent(carID)}`, true);
+    xhr.send();
+
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
@@ -133,9 +133,7 @@ function populateTable(carID) {
                 console.error("Error fetching data:", xhr.status, xhr.statusText);
         }
     };
-    
-    xhr.send(`car=${encodeURIComponent(carID)}`);
-    
+        
     search.parentNode.insertBefore(table, search);
 }
 
