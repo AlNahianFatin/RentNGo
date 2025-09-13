@@ -4,7 +4,7 @@ require_once('db.php');
 function searchCarByBrandModel($car) {
     $conn = getConnection();
     $cBMEscaped = mysqli_real_escape_string($conn, $car);
-    $sql = "SELECT * FROM cars WHERE brand LIKE '%$cBMEscaped%' OR model LIKE '%$cBMEscaped%'";
+    $sql = "SELECT * FROM car WHERE brand LIKE '%$cBMEscaped%' OR model LIKE '%$cBMEscaped%'";
     $result = mysqli_query($conn, $sql);
 
     $records = [];
@@ -20,7 +20,7 @@ function searchCarByBrandModel($car) {
 function getCarByID($cid) {
     $conn = getConnection();
     $cIDEscaped = (int)$cid;
-    $sql = "SELECT * FROM cars WHERE cid = $cIDEscaped";
+    $sql = "SELECT * FROM car WHERE cid = $cIDEscaped";
     $result = mysqli_query($conn, $sql);
 
     $record = [];
@@ -34,7 +34,7 @@ function getCarByID($cid) {
 
 function getAllCars() {
     $conn = getConnection();
-    $sql = "SELECT * FROM cars";
+    $sql = "SELECT * FROM car";
     $result = mysqli_query($conn, $sql);
 
     $records = [];

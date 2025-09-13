@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <button type="button">Admin View</button>
         </a>
 
-        <script src="../asset/fuelTracking_F.js"></script>
+        <script src="../asset/staff_FuelTracking_F.js"></script>
     </body>
 
 </html>
