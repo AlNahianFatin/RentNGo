@@ -90,18 +90,19 @@ function createBookButton(carID) {
 }
 
 function populateTable(carID) {
-    // let car = document.getElementById("Car").value.trim();
+    let search = document.querySelector(".row");
     let colIndex = rowCarBrand.cells.length;
-
+    
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", `../controller/CarComparisonCompareCar_F.php?car=${encodeURIComponent(carID)}`, true);
-
+    xhr.open("GET", `../controller/CarComparisonCompareCar_F.php`, true);
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+    
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 try {
                     let data = JSON.parse(xhr.responseText);
-
+                    
                     if (!data || typeof data !== "object" || Object.keys(data).length === 0) {
                         rowCarBrand.insertCell().textContent = "Unknown Brand";
                         rowCarModel.insertCell().textContent = "Unknown Model";
@@ -111,10 +112,8 @@ function populateTable(carID) {
                         rowAvailable.insertCell().textContent = "Unknown";
                         rowCross.insertCell().appendChild(createCrossButton(colIndex, carID));
                     }
-
+                    
                     else {
-                        // let row = tbody.insertRow();
-                        // row.insertCell().textContent = Number(record.cid);
                         rowCarBrand.insertCell().textContent = data.brand;
                         rowCarModel.insertCell().textContent = data.model;
                         rowRent.insertCell().textContent = Number(data.rent);
@@ -123,7 +122,7 @@ function populateTable(carID) {
                         rowAvailable.insertCell().textContent = Number(data.available) <= 0 ? "Not available" : Number(data.available);
                         rowCross.insertCell().appendChild(createCrossButton(colIndex, carID));
                         if(!isAdmin)
-                            rowBook.insertCell().appendChild(createBookButton(colIndex, carID));
+                            rowBook.insertCell().appendChild(createBookButton(carID));
                     }
                 } 
                 catch (err) {
@@ -134,20 +133,10 @@ function populateTable(carID) {
                 console.error("Error fetching data:", xhr.status, xhr.statusText);
         }
     };
-
-    xhr.send();
-
-    // rowCarID.insertCell().textContent = `Car ${cars + 1}`;
-    // rowCarBrand.insertCell().textContent = `Car ${cars + 1}`;
-    // rowCarModel.insertCell().textContent = `Car ${cars + 1}`;
-    // rowRent.insertCell().textContent = `${1000 + cars * 500} tk`;
-    // rowSeats.insertCell().textContent = `${4 + cars}`;
-    // rowMileage.insertCell().textContent = `${12 + cars * 2} km/h`;
-    // rowAvailable.insertCell().textContent = `${12 + cars * 2} km/h`;
-    // rowCross.insertCell().appendChild(createCrossButton(colIndex));
-    // rowBook.insertCell().appendChild(createBookButton(colIndex));
-
-    document.body.appendChild(table);
+    
+    xhr.send(`car=${encodeURIComponent(carID)}`);
+    
+    search.parentNode.insertBefore(table, search);
 }
 
 function addCar(carID, adminFlag) {
