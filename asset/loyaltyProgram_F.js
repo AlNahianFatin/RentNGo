@@ -92,7 +92,7 @@ function validateScheme() {
 }
 
 function activation(scheme, isActive) {
-    newStatus = isActive ? 0 : 1;
+    let newStatus = isActive ? 0 : 1;
     const xhr = new XMLHttpRequest();
     xhr.open("POST", `../controller/LoyaltyProgramActivation_F.php`, true);
     xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
@@ -133,13 +133,7 @@ function dlt(scheme) {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
                 let btn = document.getElementById("dltBttn" + scheme);
-                // let stts = document.getElementById("activationStts" + scheme);
                 if (btn) {
-                    // btn.innerHTML = newStatus ? "Deactivate" : "Activate";
-                    // stts.innerHTML = newStatus ? "Active" : "Deactive";
-                    // btn.setAttribute("onclick", `activation('${scheme}', ${newStatus})`);
-
-                    // statusText = newStatus ? "activated" : "deactivated";
                     let row = btn.closest("tr");
                     if (row)
                         row.remove();
@@ -158,7 +152,6 @@ function dlt(scheme) {
         };
     }
     xhr.send(`scheme=${encodeURIComponent(scheme)}`);
-    xhr.send(`customer=${encodeURIComponent(customer)}`);
 }
 
 function validateUpdateScheme() {
@@ -208,39 +201,20 @@ function validateUpdateScheme() {
         }, 2000);
         return false;
     }
-
-    // const xhr = new XMLHttpRequest();
-    // xhr.open("POST", `../controller/LoyaltyProgramUpdate_F.php`, true);
-    // xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
-    
-    // xhr.onreadystatechange = function () {
-    //     if (xhr.readyState === 4) {
-    //         if (xhr.status === 200) {
-    //             // let stts = document.getElementById("activationStts" + scheme);
-    //             if (btn) {
-    //                 // btn.innerHTML = newStatus ? "Deactivate" : "Activate";
-    //                 // stts.innerHTML = newStatus ? "Active" : "Deactive";
-    //                 // btn.setAttribute("onclick", `activation('${scheme}', ${newStatus})`);
-                    
-    //                 // statusText = newStatus ? "activated" : "deactivated";
-    //                 let row = btn.closest("tr");
-    //                 if(row) 
-    //                     row.remove();
-                    
-    //                 mssg.textContent = scheme + " has been successfully updated";
-    //                 mssg.style.backgroundColor = "green";
-    //                 document.body.appendChild(mssg);
-                    
-    //                 setTimeout(() => {
-    //                     mssg.remove();
-    //                 }, 2000);
-    //             }
-    //             else
-    //                 console.error("Error deleting scheme:", xhr.status, xhr.statusText);
-    //         }
-    //     };
-    // }
-    // xhr.send(`scheme=${encodeURIComponent(scheme)}`);
-    
     return true;
+}
+
+function applyScheme(scheme) {
+    const oldMsg = document.getElementById("msg");
+    if (oldMsg)
+        oldMsg.remove();
+
+    mssg.textContent = scheme + " has been applied successfully";
+    mssg.style.backgroundColor = "green";
+    document.body.appendChild(mssg);
+
+    setTimeout(() => {
+        mssg.remove();
+    }, 2000);
+    return false;
 }

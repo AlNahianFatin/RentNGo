@@ -10,14 +10,26 @@ if(!isset($_SESSION['status'])) {
     // exit;
 }
 
+if(!isset($_COOKIE['username'])) {
+    // header('location: ../index.php?error=sessionExpired');
+    // exit;
+}
+if(!isset($_COOKIE['status'])) {
+    // header('location: ../index.php?error=invalidRequest');
+    // exit;
+}
+
+require_once('../model/loyaltyModel.php');
+$records = getAllLoyalties();
+
 $message = "";
 $messageColor = "red"; 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $scheme = isset($_POST["scheme"]) ? $_POST["scheme"] : "";
-    
-    if (empty($scheme)) 
-        $message = "Please enter a reward scheme first.";
-}
+
+        $_SESSION['username'] = "Al Nahian Fatin";
+// $_SESSION['username'] = $_REQUEST['username'];
+require_once('../model/rentModel.php');
+$records = getAvailableLoyalties();
+        $points = getCustomerLoyaltyPoints($_SESSION['username']);
 ?>
 
 <!DOCTYPE html>
@@ -40,55 +52,38 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
 
-    <?php if (!empty($message)): ?>
-            <div id="msg" style="
-                position: fixed;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                color: white;
-                opacity: 0.9;
-                padding: 10px 20px;
-                border: 1px solid black;
-                border-radius: 6px;
-                font-family: Inika;
-                z-index: 9999;
-                box-shadow: 0 5px 10px rgba(0,0,0,0.6);
-                background-color: <?= $messageColor ?>;
-            ">
-                <?= htmlspecialchars($message) ?>
-            </div>
-            <script>
-                setTimeout(() => {
-                    const msg = document.getElementById('msg');
-                    if (msg) msg.remove();
-                }, 2000);
-            </script>
-        <?php endif;?>
-
     <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; margin-top: 10vh;">
         <img src="../asset/points.png" class="loyaltyPoints" alt="Points icon" style="width: 40px;">
-        <label class="font-itim">Loyalty Points: 0</label>
+        <label class="font-itim">Available Loyalty Points: <?= htmlspecialchars($points['lpoints']) ?></label>
     </div><br>
 
-    <table style="border: none; border-collapse: collapse;">
-        <thead>
-            <td style="border: none; font-size: 30px;" colspan="4">Available Reward Catalog</td>
+    <table style="border: 1; border-collapse: collapse;">
+        <thead style = "font-weight: bold;">
+            <tr>
+                <td >Reward Scheme</td>
+                <td>Points Required</td>
+                <td>Amenities</td>
+                <td>Amount</td>
+                <td></td>
+            </tr>
         </thead>
-        <thead style="border: none;">
-            <td class="left" style="border: none;">Reward Scheme</td>
-            <td style="border: none;">Points Required</td>
-            <td style="border: none;">Amenities</td>
-            <td style="border: none;">Copy to Clipboard</td>
-        </thead>
-        <tbody></tbody>
+        <tbody>
+            <?php if (!empty($records)) { 
+                foreach ($records as $record) { ?>
+                    <tr>
+                        <td><?= htmlspecialchars($record['scheme']) ?></td>
+                        <td><?= htmlspecialchars($record['points'] ? $record['points'] : 0) ?></td>
+                        <td><?= htmlspecialchars($record['amentities']) ?></td>
+                        <td><?= htmlspecialchars($record['amount']) ?></td>
+                        <td><input type="submit"  name="submit" value="Apply" onclick="return applyScheme('<?= htmlspecialchars($record['scheme']) ?>')"></td>
+                    </tr>
+            <?php } 
+            } 
+            else { ?>
+                <tr><td colspan="11">No records found</td></tr>
+            <?php } ?>
+        </tbody>
     </table>
-
-    <form action="Customer_LoyaltyProgram_F.php" method="post" onsubmit="return validateScheme()">
-        <label for="scheme">Enter Reward Scheme: </label>
-        <input type="text" id="scheme" class="font-itim" name="scheme" style="border-radius: 10px; margin: 0px 15px;" placeholder="Enter Reward Scheme">
-        <input type="submit" name="submit" value="Apply">
-    </form> <br> <br>
 
     <a href="Admin_LoyaltyProgram_F.php">
         <button type="button">Admin View</button>
