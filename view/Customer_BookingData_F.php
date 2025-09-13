@@ -99,7 +99,7 @@ $records = getRentRecordByCName($_SESSION['username']);
     </table>
 
     <a href="Admin_BookingData_F.php">
-        <button type="button">Admin View</button>
+        <button>Admin View</button>
     </a>
 </body>
 </html>

@@ -112,11 +112,11 @@ $records = getAllRentRecords();
     </div>
 
     <a href="Staff_BookingData_F.php">
-        <button type="button">Staff View</button>
+        <button>Staff View</button>
     </a>
     
     <a href="Customer_BookingData_F.php">
-        <button type="button">Customer View</button>
+        <button>Customer View</button>
     </a>
 
     <script src="../asset/bookingData_F.js"></script>

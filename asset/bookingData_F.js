@@ -20,7 +20,8 @@ function searchCustomer() {
     tbody.innerHTML = "";
 
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", `../controller/BookingDataSearchCustomer_F.php?customer=${encodeURIComponent(customer)}`, true);
+    xhr.open("GET", `../controller/BookingDataSearchCustomer_F.php`, true);
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) { 
@@ -59,7 +60,7 @@ function searchCustomer() {
         }
     };
 
-    xhr.send();
+    xhr.send(`customer=${encodeURIComponent(customer)}`);
 
     if (mssg && document.body.contains(mssg))
         mssg.remove();
