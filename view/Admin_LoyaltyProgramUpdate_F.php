@@ -19,18 +19,29 @@ if(!isset($_COOKIE['status'])) {
     // exit;
 }
 
+if(!isset($_SESSION['scheme'])) {
+    $_SESSION['error'] = "invalidScheme";
+    header("Location: Admin_LoyaltyProgram_F.php");
+    exit;
+}
+
 require_once('../model/loyaltyModel.php');
+$records = getLoyaltyBySName($_SESSION['scheme']);
 
 $message = "";
 $messageColor = "red"; 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $scheme = isset($_POST["scheme"]) ? trim($_POST["scheme"]) : "";
+    $scheme = isset($_SESSION["scheme"]) ? $_SESSION["scheme"] : "";
     $points = (isset($_POST["points"]) && $_POST["points"] !== "") ? floatval($_POST["points"]) : 0;
     $type = isset($_POST["type"]) ? $_POST["type"] : "";
     $amount = isset($_POST["amount"]) ? floatval($_POST["amount"]) : "";
 
-    if (empty($scheme)) 
-        $message = "Please enter a reward scheme first.";
+    if (empty($scheme)) {
+        $_SESSION['message'] = "Scheme name could not be found. Please try refreshing the page.";
+        $_SESSION['messageColor'] = "red";
+        header("Location: Admin_LoyaltyProgram_F.php");
+        exit;
+    }
     
     else if ($points !== null && (!is_numeric($points) || $points < 0))  
         $message = "Please enter a valid reward point first.";
@@ -52,23 +63,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             'activation'  => 1  
         ];
 
-        $result = addScheme($loyalty);
-        if($result['status'] === "success") {
-            $_SESSION['message'] = "Loyalty scheme added successfully.";
+        if(updateScheme($loyalty)) {
+            $_SESSION['message'] = "Loyalty scheme updated successfully.";
             $_SESSION['messageColor'] = "green";
-            header("Location: Admin_LoyaltyProgramAdd_F.php");
-            exit;
-        }
-        else if($result['status'] === "exists") {
-            $_SESSION['message'] = "Scheme with this name already exists.";
-            $_SESSION['messageColor'] = "red";
-            header("Location: Admin_LoyaltyProgramAdd_F.php");
+            header("Location: Admin_LoyaltyProgramUpdate_F.php");
             exit;
         }
         else {
             $_SESSION['message'] = "Oops! Something went wrong.";
             $_SESSION['messageColor'] = "red";
-            header("Location: Admin_LoyaltyProgramAdd_F.php");
+            header("Location: Admin_LoyaltyProgramUpdate_F.php");
             exit;
         }
     }
@@ -108,7 +112,7 @@ if (isset($_SESSION['message'])): ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin_LoyaltyProgramAdd</title>
+    <title>Admin_LoyaltyProgramUpdate</title>
 
     <link rel="stylesheet" href="../asset/style_F.css">
 </head>
@@ -153,12 +157,10 @@ if (isset($_SESSION['message'])): ?>
         <label class="font-itim" style="font-weight: bold; font-size: 35px;">Loyalty Program Management</label>
     </div><br>
 
-    <form action="Admin_LoyaltyProgramAdd_F.php" method="post" style="margin-top: 5vh;" onsubmit="return validateAddScheme()">
+    <form action="Admin_LoyaltyProgramUpdate_F.php" method="post" style="margin-top: 5vh;" onsubmit="return validateUpdateScheme()">
         <fieldset>
-            <legend>Add Loyalty Program</legend>
-            <label for="scheme">Reward Scheme:</label>
-            <input type="text" id="scheme" class="font-itim" name="scheme" style="border-radius: 10px;"
-                placeholder="Enter Reward Scheme"> <br> <br>
+            <legend>Update Loyalty Program</legend>
+            <pre style="font-family: itim; font-size: 30px;" for="scheme">Reward Scheme:        <?= $_SESSION['scheme'] ?></pre> <br>
             <label for="points">Points Required:</label>
             <input type="number" id="points" class="font-itim" name="points" style="border-radius: 10px; 
                 width: auto;" placeholder="Required Points"> <br> <br>
@@ -171,7 +173,7 @@ if (isset($_SESSION['message'])): ?>
             <label for="amount">Loyalty Amount:</label>
             <input type="number" id="amount" class="font-itim" name="amount"
                 style="border-radius: 10px; width: auto;" placeholder="Amount"> <br> <br>
-            <input type="submit" name="submit" value="Add">
+            <input type="submit" name="submit" value="Update">
         </fieldset>
     </form> 
 
@@ -183,6 +185,36 @@ if (isset($_SESSION['message'])): ?>
     </a>
 
     <script src="../asset/loyaltyProgram_F.js"></script>
+    <script>
+        const xhr = new XMLHttpRequest();
+        xhr.open("GET", `../controller/LoyaltyProgramUpdatePopulate_F.php?scheme=${encodeURIComponent("<?= $_SESSION['scheme'] ?>")}`, true);
+        
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    try {
+                        let data = JSON.parse(xhr.responseText);
+                        
+                        if (!Array.isArray(data) && data.length === 0) {
+                            document.getElementById("points").value = "";
+                            document.getElementById("type").value = "";
+                            document.getElementById("amount").value = "";
+                            return;
+                        }
+                        document.getElementById("points").value = data[0].points;
+                        document.getElementById("type").value = data[0].amentities;
+                        document.getElementById("amount").value = data[0].amount;
+                    } 
+                    catch (err) {
+                        console.error("Error parsing JSON:", err);
+                    }
+                }
+                else
+                    console.error("Error getting scheme details:", xhr.status, xhr.statusText);
+            }
+        };
+        xhr.send();
+    </script>
 </body>
 
 </html>
