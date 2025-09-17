@@ -97,7 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     <a href="Admin_PickupLocation_F.php">
-        <button type="button">Admin View</button>
+        <button>Admin View</button>
     </a>
 
     <script src="../asset/pickupLocations_F.js"></script>

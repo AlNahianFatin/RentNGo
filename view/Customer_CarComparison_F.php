@@ -69,6 +69,7 @@ $records = getAllCars();
     <table id="records" style="width: auto; max-width: 100vw; margin: 5vh 0">
         <thead style = "font-weight: bold;">
             <tr>
+                <td>Car Image</td>
                 <td>Car ID</td>
                 <td>Car Brand</td>
                 <td>Car Model</td>
@@ -84,6 +85,7 @@ $records = getAllCars();
             <?php if (!empty($records)) { 
                 foreach ($records as $record) { ?>
                     <tr>
+                        <td><?= htmlspecialchars($record['image']) ?></td>
                         <td><?= htmlspecialchars($record['cid']) ?></td>
                         <td><?= htmlspecialchars($record['brand']) ?></td>
                         <td><?= htmlspecialchars($record['model']) ?></td>

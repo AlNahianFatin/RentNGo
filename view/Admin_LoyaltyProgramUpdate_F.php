@@ -26,7 +26,7 @@ if(!isset($_SESSION['scheme'])) {
 }
 
 require_once('../model/loyaltyModel.php');
-$records = getLoyaltyBySName($_SESSION['scheme']);
+$record = getLoyaltyBySName($_SESSION['scheme']);
 
 $message = "";
 $messageColor = "red"; 
@@ -160,7 +160,7 @@ if (isset($_SESSION['message'])): ?>
     <form action="Admin_LoyaltyProgramUpdate_F.php" method="post" style="margin-top: 5vh;" onsubmit="return validateUpdateScheme()">
         <fieldset>
             <legend>Update Loyalty Program</legend>
-            <pre style="font-family: itim; font-size: 30px;" for="scheme">Reward Scheme:        <?= $_SESSION['scheme'] ?></pre> <br>
+            <pre style="font-family: itim; font-size: 30px;" for="scheme">Reward Scheme:        <?= $record['scheme'] ?></pre> <br>
             <label for="points">Points Required:</label>
             <input type="number" id="points" class="font-itim" name="points" style="border-radius: 10px; 
                 width: auto;" placeholder="Required Points"> <br> <br>
@@ -185,36 +185,6 @@ if (isset($_SESSION['message'])): ?>
     </a>
 
     <script src="../asset/loyaltyProgram_F.js"></script>
-    <script>
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", `../controller/LoyaltyProgramUpdatePopulate_F.php?scheme=${encodeURIComponent("<?= $_SESSION['scheme'] ?>")}`, true);
-        
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    try {
-                        let data = JSON.parse(xhr.responseText);
-                        
-                        if (!Array.isArray(data) && data.length === 0) {
-                            document.getElementById("points").value = "";
-                            document.getElementById("type").value = "";
-                            document.getElementById("amount").value = "";
-                            return;
-                        }
-                        document.getElementById("points").value = data[0].points;
-                        document.getElementById("type").value = data[0].amentities;
-                        document.getElementById("amount").value = data[0].amount;
-                    } 
-                    catch (err) {
-                        console.error("Error parsing JSON:", err);
-                    }
-                }
-                else
-                    console.error("Error getting scheme details:", xhr.status, xhr.statusText);
-            }
-        };
-        xhr.send();
-    </script>
 </body>
 
 </html>

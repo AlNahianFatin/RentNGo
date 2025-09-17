@@ -132,18 +132,16 @@ if(isset($_SESSION['scheme']))
 
     <table id="records" style="width: auto; max-width: 100vw; margin: 5vh 0">
         <thead style = "font-weight: bold;">
-            <!-- <td style="border: 1; font-size: 25px;" colspan="8">Reward Catalog</td> -->
-        <!-- </thead> -->
-        <tr>
-            <td class="left" style="border: 1; font-weight: bold;">Reward Scheme</td>
-            <td style="border: 1; font-weight: bold;">Points Required</td>
-            <td style="border: 1; font-weight: bold;">Amenities</td>
-            <td style="border: 1; font-weight: bold;">Amount</td>
-            <td style="border: 1; font-weight: bold;">Activation Status</td>
-            <td style="border: 1; font-weight: bold;">Activate/Deactivate</td>
-            <td style="border: 1; font-weight: bold;">Update</td>
-            <td style="border: 1; font-weight: bold;">Delete</td>
-        </tr>
+            <tr>
+                <td class="left" style="border: 1; font-weight: bold;">Reward Scheme</td>
+                <td style="border: 1; font-weight: bold;">Points Required</td>
+                <td style="border: 1; font-weight: bold;">Amenities</td>
+                <td style="border: 1; font-weight: bold;">Amount</td>
+                <td style="border: 1; font-weight: bold;">Activation Status</td>
+                <td style="border: 1; font-weight: bold;">Activate/Deactivate</td>
+                <td style="border: 1; font-weight: bold;">Update</td>
+                <td style="border: 1; font-weight: bold;">Delete</td>
+            </tr>
         </thead>
 
         <tbody>

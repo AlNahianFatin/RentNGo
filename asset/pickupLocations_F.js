@@ -1,14 +1,3 @@
-let branchLocation;
-let branchId = 1;
-
-let pickLoc;
-let dropLoc;
-
-let locations = [];
-
-let searchedC = false;
-let div;
-
 let mssg = document.createElement("label");
 mssg.id = "msg";
 mssg.style.position = "fixed";
@@ -24,25 +13,42 @@ mssg.style.fontFamily = "Inika";
 mssg.style.zIndex = "9999";
 mssg.style.boxShadow = "0 5px 10px rgba(0,0,0,0.6)";
 
-let pRecords = document.getElementById("pickup");
-let dRecords = document.getElementById("dropoff");
-locations.forEach(rec => {
-    let recordCustomer = document.createElement("option");
-    recordCustomer.innerHTML = `${rec.loc}`;
-    pRecords.appendChild(recordCustomer);
-    dRecords.appendChild(recordCustomer);
-})
+function createActivationButton(bid, isActive) {
+    const activate = document.createElement("button");
+    activate.innerHTML = isActive ? "Deactivate" : "Activate";
+    activate.id = "availableBttn" + bid;
 
-let tbody = document.getElementById("records").querySelector("tbody");
-tbody.innerHTML = "";
-locations.forEach(rec => {
-    let row = document.createElement("tr");
-    row.innerHTML = `<td value=${rec.id}> ${rec.id} </td> <td value=${rec.loc} > ${rec.loc} </td>`;
-    tbody.appendChild(row);
-})
+    activate.addEventListener("click", function () {
+        availability(bid, isActive);
+    });
+    return activate;
+}
+
+function createUpdateButton(bid) {
+    const update = document.createElement("button");
+    update.innerHTML = "Update";
+
+    update.addEventListener("click", function () {
+        window.location.href = `../controller/setBranch_F.php?bid=${encodeURIComponent(bid)}`;
+    });
+    return update;
+}
+
+function createDeleteButton(bid) {
+    const d = document.createElement("button");
+    d.innerHTML = "Delete";
+    d.id = "dltBttn" + bid;
+    d.style.backgroundColor = "red";
+
+    d.addEventListener("click", function () {
+        dlt(bid);
+    });
+    return d;
+}
 
 function clearTexts() {
     branchLocation = "";
+    document.getElementById("district").value = "";
     document.getElementById("location").value = "";
 
     pickLoc = "";
@@ -50,6 +56,34 @@ function clearTexts() {
 
     if (mssg && document.body.contains(mssg))
         mssg.remove();
+}
+
+function validateUpdateLocation(bid) {
+    let district = document.getElementById("district").value.trim();
+    let location = document.getElementById("location").value.trim();
+
+    if (district == "") {
+        mssg.textContent = "Please enter a district first";
+        mssg.style.backgroundColor = "red";
+        document.body.appendChild(mssg);
+
+        setTimeout(() => {
+            mssg.remove();
+        }, 2000);
+        return false;
+    }
+    
+    if (location == "") {
+        mssg.textContent = "Please enter a location first";
+        mssg.style.backgroundColor = "red";
+        document.body.appendChild(mssg);
+
+        setTimeout(() => {
+            mssg.remove();
+        }, 2000);
+        return false;
+    }
+    return true;
 }
 
 function validateLocation() {
@@ -107,91 +141,125 @@ function validatePickupDropoff() {
     return true;
 }
 
-function searchCustomer() {
-    searchedC = true;
+let debounceTimer;
+const locationInput = document.getElementById("Branch");
+locationInput.addEventListener("input", () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+        searchLocation();
+    }, 200);
+});
 
-    let customer = document.getElementById("Customer").value;
+function searchLocation() {
+    let branch = document.getElementById("Branch").value.trim();
+    let table = document.getElementById("records");
+    let tbody = table.querySelector("tbody");
+    tbody.innerHTML = "";
 
-    if (customer === "") {
-        mssg.textContent = "Please enter a customer name first";
-        mssg.style.backgroundColor = "red";
-        document.body.appendChild(mssg);
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", `../controller/PickupLocationSearchLocation_F.php?branch=${encodeURIComponent(branch)}`, true);
+    xhr.send();
 
-        setTimeout(() => {
-            mssg.remove();
-        }, 2000);
-        return false;
-    }
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                try {
+                    let data = JSON.parse(xhr.responseText);
 
-    if (div)
-        div.remove();
+                    if (!Array.isArray(data) || data.length === 0) {
+                        let row = tbody.insertRow();
+                        let cell = row.insertCell();
+                        cell.colSpan = 7;
+                        cell.textContent = "No records found";
+                        return;
+                    }
 
-    div = document.createElement("div");
-    div.style.display = "flex";
-    div.style.flexDirection = "column";
-    div.style.alignItems = "center";
-    div.style.justifyContent = "center";
-    div.style.gap = "2vh";
+                    data.forEach(record => {
+                        let row = tbody.insertRow();
+                        row.insertCell().textContent = record.bid;
+                        row.insertCell().textContent = record.district;
+                        row.insertCell().textContent = record.location;
 
-    let table = document.createElement("table");
-    table.border = "1";
-    table.style.marginTop = "15vh";
-    table.style.maxWidth = "80vw";
-    table.style.overflowX = "auto";
-    table.style.display = "block";
+                        let statusCell = row.insertCell();
+                        statusCell.id = "availibilityStts" + record.bid;
+                        statusCell.textContent = Number(record.available) === 1 ? "Available" : "Unavailable";
 
-    let thead = table.createTHead();
-    let headerRow = thead.insertRow();
+                        row.insertCell().appendChild(createActivationButton(record.bid, Number(record.available) === 1));
+                        row.insertCell().appendChild(createUpdateButton(record.bid));
+                        row.insertCell().appendChild(createDeleteButton(record.bid));
+                    });
+                } catch (err) {
+                    console.error("Error parsing JSON:", err);
+                }
+            } else {
+                console.error("Error fetching data:", xhr.status, xhr.statusText);
+            }
+        }
+    };
 
-    let th1 = document.createElement("th");
-    th1.textContent = "Customer ID";
-    headerRow.appendChild(th1);
-
-    let th2 = document.createElement("th");
-    th2.textContent = "Customer Name";
-    headerRow.appendChild(th2);
-
-    let tbody = table.createTBody();
-    let dataRow = tbody.insertRow();
-
-    dataRow.insertCell().textContent = `fgh`;
-    dataRow.insertCell().textContent = `${customer}`;
-
-    div.appendChild(table);
-
-    let bttnGroup = document.createElement("div");
-    bttnGroup.style.display = "flex";
-    bttnGroup.style.gap = "2vw";
-
-    let clear = document.createElement("button");
-    clear.classList.add("button");
-    clear.innerText = "Clear";
-    clear.style.backgroundColor = "red";
-
-    clear.addEventListener("click", function () {
-        div.remove();
-        customer = "";
-        document.getElementById("Customer").value = "";
-    });
-
-    let confirm = document.createElement("button");
-    confirm.classList.add("button");
-    confirm.innerText = "Confirm";
-
-    confirm.addEventListener("click", function () {
-        let id = 123;
-        window.location.href = "../controller/PickupLocationSearchCustomer_F.php?id=" + encodeURIComponent(id);
-
-    });
-
-    bttnGroup.appendChild(clear);
-    bttnGroup.appendChild(confirm);
-    div.appendChild(bttnGroup);
-    document.body.appendChild(div);
-
-    customer = "";
-    document.getElementById("Customer").value = "";
     if (mssg && document.body.contains(mssg))
         mssg.remove();
-    return true;
-} 
+}
+
+function availability(bid, isActive) {
+    let newStatus = isActive ? 0 : 1;
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `../controller/PickupLocationActivation_F.php`, true);
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let btn = document.getElementById("availableBttn" + bid);
+                let stts = document.getElementById("availibilityStts" + bid);
+                if (btn) {
+                    btn.innerHTML = newStatus ? "Deactivate" : "Activate";
+                    stts.innerHTML = newStatus === 1 ? "Available" : "Unavailable";
+                    btn.setAttribute("onclick", `availability('${bid}', ${newStatus})`);
+
+                    statusText = newStatus ? "activated" : "deactivated";
+                    mssg.textContent = bid + " has been successfully " + statusText;
+                    mssg.style.backgroundColor = "green";
+                    document.body.appendChild(mssg);
+
+                    setTimeout(() => {
+                        mssg.remove();
+                    }, 2000);
+                }
+                else
+                    console.error("Error updating activation:", xhr.status, xhr.statusText);
+            }
+        };
+    }
+    xhr.send(`bid=${encodeURIComponent(bid)}&activation=${encodeURIComponent(newStatus)}`);
+}
+
+function dlt(bid) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", `../controller/PickupLocationDeletion_F.php`, true);
+    xhr.setRequestHeader("content-type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                let btn = document.getElementById("dltBttn" + bid);
+                if (btn) {
+                    let row = btn.closest("tr");
+                    if (row)
+                        row.remove();
+
+                    mssg.textContent = bid + " has been successfully deleted";
+                    mssg.style.backgroundColor = "green";
+                    document.body.appendChild(mssg);
+
+                    setTimeout(() => {
+                        mssg.remove();
+                    }, 2000);
+                }
+                else
+                    console.error("Error deleting location:", xhr.status, xhr.statusText);
+            }
+        };
+    }
+    xhr.send(`bid=${encodeURIComponent(bid)}`);
+}

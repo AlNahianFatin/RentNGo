@@ -91,6 +91,56 @@ function validateScheme() {
     return true;
 }
 
+function validateUpdateScheme() {
+    let points = Number(document.getElementById("points").value);
+    let type = document.getElementById("type").value.trim();
+    let amount = Number(document.getElementById("amount").value);
+
+    if (isNaN(points) || points < 0) {
+        mssg.textContent = "Please enter a valid reward point first";
+        mssg.style.backgroundColor = "red";
+        document.body.appendChild(mssg);
+
+        setTimeout(() => {
+            mssg.remove();
+        }, 2000);
+        return false;
+    }
+
+    if (type == "") {
+        mssg.textContent = "Please select a amentities type first";
+        mssg.style.backgroundColor = "red";
+        document.body.appendChild(mssg);
+
+        setTimeout(() => {
+            mssg.remove();
+        }, 2000);
+        return false;
+    }
+
+    if (!amount || isNaN(amount) || amount <= 0) {
+        mssg.textContent = "Please enter a valid loyalty amount first";
+        mssg.style.backgroundColor = "red";
+        document.body.appendChild(mssg);
+
+        setTimeout(() => {
+            mssg.remove();
+        }, 2000);
+        return false;
+    }
+    if (type === "Rent Discount (%)" && amount > 100) {
+        mssg.textContent = "Loyalty amount cannot be more than 100%";
+        mssg.style.backgroundColor = "red";
+        document.body.appendChild(mssg);
+
+        setTimeout(() => {
+            mssg.remove();
+        }, 2000);
+        return false;
+    }
+    return true;
+}
+
 function activation(scheme, isActive) {
     let newStatus = isActive ? 0 : 1;
     const xhr = new XMLHttpRequest();
@@ -152,56 +202,6 @@ function dlt(scheme) {
         };
     }
     xhr.send(`scheme=${encodeURIComponent(scheme)}`);
-}
-
-function validateUpdateScheme() {
-    let points = Number(document.getElementById("points").value);
-    let type = document.getElementById("type").value.trim();
-    let amount = Number(document.getElementById("amount").value);
-
-    if (isNaN(points) || points < 0) {
-        mssg.textContent = "Please enter a valid reward point first";
-        mssg.style.backgroundColor = "red";
-        document.body.appendChild(mssg);
-
-        setTimeout(() => {
-            mssg.remove();
-        }, 2000);
-        return false;
-    }
-
-    if (type == "") {
-        mssg.textContent = "Please select a amentities type first";
-        mssg.style.backgroundColor = "red";
-        document.body.appendChild(mssg);
-
-        setTimeout(() => {
-            mssg.remove();
-        }, 2000);
-        return false;
-    }
-
-    if (!amount || isNaN(amount) || amount <= 0) {
-        mssg.textContent = "Please enter a valid loyalty amount first";
-        mssg.style.backgroundColor = "red";
-        document.body.appendChild(mssg);
-
-        setTimeout(() => {
-            mssg.remove();
-        }, 2000);
-        return false;
-    }
-    if (type === "Rent Discount (%)" && amount > 100) {
-        mssg.textContent = "Loyalty amount cannot be more than 100%";
-        mssg.style.backgroundColor = "red";
-        document.body.appendChild(mssg);
-
-        setTimeout(() => {
-            mssg.remove();
-        }, 2000);
-        return false;
-    }
-    return true;
 }
 
 function applyScheme(scheme) {

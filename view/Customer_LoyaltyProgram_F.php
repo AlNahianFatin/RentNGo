@@ -64,7 +64,7 @@ $records = getAvailableLoyalties();
                 <td>Points Required</td>
                 <td>Amenities</td>
                 <td>Amount</td>
-                <td></td>
+                <td>Apply</td>
             </tr>
         </thead>
         <tbody>

@@ -64,11 +64,10 @@ $records = getAllCars();
             placeholder="Car Brand or Model"> <br> <br>
     </div>
 
-    <!-- <button style="margin-left: 90vw; margin-top: 2vh;" onclick="return addCar()">Add a Car</button> -->
-
     <table id="records" style="width: auto; max-width: 100vw; margin: 5vh 0">
         <thead style = "font-weight: bold;">
             <tr>
+                <td>Car Image</td>
                 <td>Car ID</td>
                 <td>Car Brand</td>
                 <td>Car Model</td>
@@ -76,7 +75,7 @@ $records = getAllCars();
                 <td>No. of Seats</td>
                 <td>Mileage (km)</td>
                 <td>Available Quantity</td>
-                <td></td>
+                <td>Compare</td>
             </tr>
         </thead>
     
@@ -84,6 +83,7 @@ $records = getAllCars();
             <?php if (!empty($records)) { 
                 foreach ($records as $record) { ?>
                     <tr>
+                        <td><?= htmlspecialchars($record['image']) ?></td>
                         <td><?= htmlspecialchars($record['cid']) ?></td>
                         <td><?= htmlspecialchars($record['brand']) ?></td>
                         <td><?= htmlspecialchars($record['model']) ?></td>
