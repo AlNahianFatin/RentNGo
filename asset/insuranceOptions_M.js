@@ -1,21 +1,22 @@
-let form = document.getElementById("insuranceForm");
-let errorMessage = document.getElementById("errorMessage");
-
-form.addEventListener("submit", function (e) {
+document.getElementById("insuranceForm").addEventListener("submit", function(e){
   e.preventDefault();
-  errorMessage.textContent = "";
+  const formData = new FormData(this);
 
-  let validationError = Insurance.validate(
-    document.getElementById("coverageTier").value,
-    document.getElementById("deductible").value,
-    document.getElementById("claimScenario").value.trim()
-  );
-
-  if (validationError) {
-    errorMessage.textContent = validationError;
-    return;
-  }
-
-  form.reset();
-  window.location.href = "Review&RatingM.html";
+  fetch("InsuranceOptions_M.php", {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert(data.message);
+      window.location.href = data.next;
+    } else {
+      alert("❌ " + data.message);
+    }
+  })
+  .catch(err => {
+    console.error("Error:", err);
+    alert("Something went wrong!");
+  });
 });

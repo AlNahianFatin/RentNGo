@@ -4,21 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pricing Calculator</title>
-<link rel="stylesheet" href="../asset/CSS/pricingM.css" />
-
+  <link rel="stylesheet" href="../asset/pricingCalculator_M.css" />
 </head>
 <body>
-  <form id="pricingForm" method="POST" action="pricingM.php">
+  <form id="pricingForm" method="POST" action="PricingCalculator_M.php">
     <h2>Pricing Calculator</h2>
 
     <label for="startDate">Start Date :</label>
-    <input type="date" id="startDate" required />
+    <input type="date" id="startDate" name="startDate" />
 
     <label for="endDate">End Date :</label>
-    <input type="date" id="endDate" required />
+    <input type="date" id="endDate" name="endDate" />
 
     <label for="vehicleType">Vehicle Type :</label>
-    <select id="vehicleType" required>
+    <select id="vehicleType" name="vehicleType">
       <option value="">Choose</option>
       <option value="Premio">Premio</option>
       <option value="Prado">Prado</option>
@@ -28,16 +27,13 @@
     </select>
 
     <label for="promoCode">Promo Code :</label>
-    <input type="text" id="promoCode" />
+    <input type="text" id="promoCode" name="promoCode" />
 
     <button type="submit">Calculate Price</button>
-    <!-- <button type="admin" name="role" value="user">Calculate as User</button>
-    <button type="submit" name="role" value="admin">Calculate as Admin</button> -->
     <p id="errorMessage" class="error"></p>
   </form>
 
-  
-  <script src="../model/pricingM.js"></script>
-  <script src="../controller/pricingControllerM.js"></script>
+  <script src="../asset/pricingCalculator_M.js"></script>
+  <script src="../asset/pricingCalculator2_M.js"></script>
 </body>
 </html>

@@ -20,20 +20,35 @@ class Pricing {
     return days * rate;
   }
 
-  static validate(startDate, endDate, vehicleType) {
+  static validate(startDate, endDate, vehicleType, promoCode) {
     if (!startDate || !endDate || !vehicleType) {
-      return "❌ Please fill in all fields.";
+      return "Please fill in all fields.";
     }
 
     let start = new Date(startDate);
     let end = new Date(endDate);
 
     if (isNaN(start) || isNaN(end)) {
-      return "❌ Invalid dates.";
+      return "Invalid dates.";
     }
     if (end <= start) {
-      return "❌ End date must be after start date.";
+      return "End date must be after start date.";
     }
+
+    if(promoCode){
+      if(promoCode.length < 4 || promoCode.length > 10){
+        return "Promo code must be 4-10 characters long.";
+      }
+      for(let i=0; i<promoCode.length; i++){
+        let ch = promoCode[i];
+        if(!((ch >= "A" && ch <= "Z") ||
+             (ch >= "a" && ch <= "z") ||
+             (ch >= "0" && ch <= "9"))) {
+              return "Promo code can only contain letters and numbers.";
+             }
+      }
+    }
+  
     return null; 
   }
 }

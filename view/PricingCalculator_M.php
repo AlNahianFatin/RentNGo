@@ -1,62 +1,50 @@
 <?php
+session_start();
+require_once "../model/db_connect.php";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $startDate   = $_POST["startDate"];
     $endDate     = $_POST["endDate"];
     $vehicleType = $_POST["vehicleType"];
-    $promoCode   = $_POST["promoCode"];
+    $promoCode   = trim($_POST["promoCode"]);
     $role        = $_POST["role"] ?? "user";
 
     $error = "";
+    $allowedVehicles = ["Premio","Prado","Hiace","BMW","Allion"];
 
     if (empty($startDate) || empty($endDate) || empty($vehicleType)) {
-        $error = "❌ All required fields must be filled.";
+        $error = "All required fields must be filled.";
+    } elseif (!in_array($vehicleType, $allowedVehicles)) {
+        $error = "Invalid vehicle type.";
     } else {
         $start = strtotime($startDate);
         $end   = strtotime($endDate);
-
         if ($end <= $start) {
-            $error = "❌ End date must be after start date.";
+            $error = "End date must be after start date.";
         }
-    }
-
-    if (!$error) {
-        $dailyRates = [
-            "Premio" => 50,
-            "Prado"  => 80,
-            "Hiace"  => 70,
-            "BMW"    => 120,
-            "Allion" => 45
-        ];
-
-        $days = ($end - $start) / (60 * 60 * 24);
-        $rate = isset($dailyRates[$vehicleType]) ? $dailyRates[$vehicleType] : 0;
-        $price = $days * $rate;
-
-        if (!empty($promoCode) && strtoupper($promoCode) === "DISCOUNT10") {
-            $price *= 0.9;
-        }
-
-        setcookie("startDate", $startDate, time() + (7 * 24 * 60 * 60), "/");
-        setcookie("endDate", $endDate, time() + (7 * 24 * 60 * 60), "/");
-        setcookie("vehicleType", $vehicleType, time() + (7 * 24 * 60 * 60), "/");
-        setcookie("promoCode", $promoCode, time() + (7 * 24 * 60 * 60), "/");
-        setcookie("totalPrice", number_format($price, 2), time() + (7 * 24 * 60 * 60), "/");
-        setcookie("role", $role, time() + (7 * 24 * 60 * 60), "/");
     }
 
     if ($error) {
-        echo "<h2 style='color:red;'>$error</h2>";
-        echo "<a href='PricingCalculatorM.html'>⬅ Go back</a>";
+        echo "<h2 style='color:red;'>$error</h2><a href='PricingCalculator_M.html'>⬅ Go back</a>";
     } else {
-        echo "<h2 style='color:green;'>✅ Price calculated successfully!</h2>";
-        echo "<p><strong>Vehicle:</strong> $vehicleType</p>";
-        echo "<p><strong>Start:</strong> $startDate</p>";
-        echo "<p><strong>End:</strong> $endDate</p>";
-        echo "<p><strong>Promo:</strong> " . ($promoCode ?: "None") . "</p>";
-        echo "<p><strong>Total Price:</strong> $" . number_format($price, 2) . "</p>";
-        echo "<p><strong>Mode:</strong> $role</p>";
-        echo "<a href='PricingCalculatorM.html'>⬅ Back to form</a> | ";
-        echo "<a href='DamageReportsM.html'>➡ Continue to Damage</a>";
+        $dailyRates = ["Premio"=>50,"Prado"=>80,"Hiace"=>70,"BMW"=>120,"Allion"=>45];
+        $days = ($end - $start) / (60*60*24);
+        $rate = $dailyRates[$vehicleType];
+        $price = $days * $rate;
+        if (strtoupper($promoCode) === "DISCOUNT10") {
+            $price *= 0.9;
+        }
+
+        $sql = "INSERT INTO pricing (booking_id, start_date, end_date, promo_code, total) 
+                VALUES ('{$_SESSION["booking_id"]}', '$startDate', '$endDate', '$promoCode', '$price')";
+
+        if (!mysqli_query($conn, $sql)) {
+            die("Insert failed: " . mysqli_error($conn));
+        }
+
+        $_SESSION["pricing_id"] = mysqli_insert_id($conn);
+        header("Location: DamageReports_M.html");
+        exit;
     }
 }
 ?>

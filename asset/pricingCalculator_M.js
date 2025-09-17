@@ -19,22 +19,18 @@ function updatePrice() {
   document.getElementById(id).addEventListener("change", updatePrice);
 });
 
-
 form.addEventListener("submit", function (e) {
-  e.preventDefault();
   errorMessage.textContent = "";
 
   let validationError = Pricing.validate(
-    document.getElementById("startDate").value,
-    document.getElementById("endDate").value,
-    document.getElementById("vehicleType").value
+    form.startDate.value,
+    form.endDate.value,
+    form.vehicleType.value,
+    form.promoCode.value.trim()
   );
 
   if (validationError) {
+    e.preventDefault();
     errorMessage.textContent = validationError;
-    return;
   }
-
-  form.reset();
-  window.location.href = "DamageReportsM.html";
 });

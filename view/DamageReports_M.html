@@ -4,18 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Damage Report</title>
-<link rel="stylesheet" href="../asset/CSS/damageM.css" />
-
+  <link rel="stylesheet" href="../asset/damageReports_M.css" />
 </head>
 <body>
-  <form id="damageForm" method="POST" action="damageM.php">
+  <form id="damageForm" method="POST" action="DamageReports_M.php" enctype="multipart/form-data">
     <h2>📝 Damage Report</h2>
 
     <label for="vehicleId">Vehicle ID :</label>
-    <input type="text" id="vehicleId" style="text-transform: uppercase" />
+    <input type="text" id="vehicleId" name="vehicleId" />
 
     <label for="damageType">Damage Type :</label>
-    <select id="damageType">
+    <select id="damageType" name="damageType">
       <option value="">Select</option>
       <option value="scratch">Scratch</option>
       <option value="dent">Dent</option>
@@ -24,26 +23,21 @@
     </select>
 
     <label for="damagePhoto">Upload Photo :</label>
-    <input type="file" id="damagePhoto" accept="image/*" />
-    <p style="text-align: center">
-      <img id="photoPreview" alt="Damage Photo Preview" style="display:none;" />
-    </p>
+    <input type="file" id="damagePhoto" name="damagePhoto" accept="image/*" />
+    <p><img id="photoPreview" style="display:none;" /></p>
 
     <label for="signature">Signature :</label>
-    <input type="text" id="signature" style="text-transform: capitalize" />
+    <input type="text" id="signature" name="signature" />
 
     <label for="signaturePhoto">Upload Signature Photo :</label>
-    <input type="file" id="signaturePhoto" accept="image/*" />
-    <p style="text-align: center">
-      <img id="signaturePreview" alt="Signature Photo Preview" style="display:none;" />
-    </p>
+    <input type="file" id="signaturePhoto" name="signaturePhoto" accept="image/*" />
+    <p><img id="signaturePreview" style="display:none;" /></p>
 
     <button type="submit">Submit Report</button>
     <p id="errorMessage" class="error"></p>
   </form>
 
-  
-  <script src="../model/damageM.js"></script>
-  <script src="../controller/damageControllerM.js"></script>
+  <script src="../asset/damageReports_M.js"></script>
+  <script src="../asset/damageReports2_M.js"></script>
 </body>
 </html>

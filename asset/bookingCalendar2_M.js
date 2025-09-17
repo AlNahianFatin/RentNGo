@@ -13,6 +13,6 @@ class Booking {
     if (ret <= pickup) {
       return "Return date/time must be after pickup.";
     }
-    return null; // no errors
+    return null; 
   }
 }
