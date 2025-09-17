@@ -11,7 +11,7 @@
 <body>
     <header class="customer">
         <nav class="customerNav">
-            <a href="inventory_N.html">Home</a>
+            <a href="CustomerInventory_N.html">Home</a>
             <a href="#">About</a>
             <input type="text" class="src" style="margin-left: 70vw;">
             <button id="cSrscBtn">Search</button>
@@ -25,8 +25,8 @@
             <p>Phone: (123) 456-7890</p>
             <p>Address: 123 Main St, City, Country</p>
 
-            <button id="logoutBtn" onclick="customerLogout()">Logout</button>
-            <button type="button" id="edit">Edit</button>
+            <button id="logoutBtn" onclick="logout()">Logout</button>
+            <button id="edit" onclick="editProfile()">Edit</button>
 
         </div>
     </div>
@@ -39,7 +39,15 @@
         </div>
     </div>
 
-        <script src="../controller/customerLogout.js"></script>
+    <script src="../controller/logout_N.js"></script>
+
+    <div id="editBox">
+        <div id="editCard">
+            <p>Do you want to Edit your Profile?</p>
+            <button type="submit" id="editokBtn" class="okButn">Yes</button>
+            <button type="button" id="editcnclBtn" class="cnclButn">No</button>
+        </div>
+    </div>
 
     <footer class="cfooter">
         <p>&copy; 2024 Car Inventory. All rights reserved.</p>

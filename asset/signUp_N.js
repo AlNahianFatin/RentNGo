@@ -45,7 +45,7 @@ function signupvalidation() {
         return false;
     }
 
-    window.location.href = "../view/indexN.html";
+    window.location.href = "../view/index.html";
     return false;
 }
 

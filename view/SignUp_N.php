@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["authUser"] = $firstname;
         setcookie("authUser", $firstname, time() + 86400, "/"); // 1 day
 
-        header("Location: ../view/inventory.html");
+        header("Location: ../view/CustomerInventory_N.html");
         exit;
     } else {
         echo "❌ Invalid credentials. Please try again.";

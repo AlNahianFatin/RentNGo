@@ -1,18 +1,35 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $scheme = $_POST["scheme"] ?? "";
+session_start();
 
-    // if(!isset($_COOKIE['status'])) 
-    //    header('location: index.php?error=sessionExpired');
-
-    if (empty($scheme)) {
-        echo "<p style='color:red;'>Please enter a reward scheme first.</p>";
-        header('location: Customer_LoyaltyProgram_F.php?error=invalidRewardScheme');
-    }
-    else {
-        // echo "Scheme validated successfully.";
-    }
+if(!isset($_SESSION['username'])) {
+    // header('location: ../index.php?error=sessionExpired');
+    // exit;
 }
+if(!isset($_SESSION['status'])) {
+    // header('location: ../index.php?error=invalidRequest');
+    // exit;
+}
+
+if(!isset($_COOKIE['username'])) {
+    // header('location: ../index.php?error=sessionExpired');
+    // exit;
+}
+if(!isset($_COOKIE['status'])) {
+    // header('location: ../index.php?error=invalidRequest');
+    // exit;
+}
+
+require_once('../model/loyaltyModel.php');
+$records = getAllLoyalties();
+
+$message = "";
+$messageColor = "red"; 
+
+        $_SESSION['username'] = "Al Nahian Fatin";
+// $_SESSION['username'] = $_REQUEST['username'];
+require_once('../model/rentModel.php');
+$records = getAvailableLoyalties();
+        $points = getCustomerLoyaltyPoints($_SESSION['username']);
 ?>
 
 <!DOCTYPE html>
@@ -37,29 +54,38 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; margin-top: 10vh;">
         <img src="../asset/points.png" class="loyaltyPoints" alt="Points icon" style="width: 40px;">
-        <label class="font-itim">Loyalty Points: 0</label>
+        <label class="font-itim">Available Loyalty Points: <?= htmlspecialchars($points['lpoints']) ?></label>
     </div><br>
 
-    <table style="border: none; border-collapse: collapse;">
-        <thead>
-            <td style="border: none; font-size: 30px;" colspan="4">Available Reward Catalog</td>
+    <table style="border: 1; border-collapse: collapse;">
+        <thead style = "font-weight: bold;">
+            <tr>
+                <td >Reward Scheme</td>
+                <td>Points Required</td>
+                <td>Amenities</td>
+                <td>Amount</td>
+                <td>Apply</td>
+            </tr>
         </thead>
-        <thead style="border: none;">
-            <td class="left" style="border: none;">Reward Scheme</td>
-            <td style="border: none;">Points Required</td>
-            <td style="border: none;">Amenities</td>
-            <td style="border: none;">Copy to Clipboard</td>
-        </thead>
-        <tbody></tbody>
+        <tbody>
+            <?php if (!empty($records)) { 
+                foreach ($records as $record) { ?>
+                    <tr>
+                        <td><?= htmlspecialchars($record['scheme']) ?></td>
+                        <td><?= htmlspecialchars($record['points'] ? $record['points'] : 0) ?></td>
+                        <td><?= htmlspecialchars($record['amentities']) ?></td>
+                        <td><?= htmlspecialchars($record['amount']) ?></td>
+                        <td><input type="submit"  name="submit" value="Apply" onclick="return applyScheme('<?= htmlspecialchars($record['scheme']) ?>')"></td>
+                    </tr>
+            <?php } 
+            } 
+            else { ?>
+                <tr><td colspan="11">No records found</td></tr>
+            <?php } ?>
+        </tbody>
     </table>
 
-    <form action="Customer_LoyaltyProgram_F.php" method="post" onsubmit="return validateScheme(event)">
-        <label for="scheme">Enter Reward Scheme: </label>
-        <input type="text" id="scheme" class="font-itim" name="scheme" style="border-radius: 10px; margin: 0px 15px;" placeholder="Enter Reward Scheme">
-        <input type="submit" name="submit" value="Apply">
-    </form> <br> <br>
-
-    <a href="Admin_LoyaltyProgram_F.html">
+    <a href="Admin_LoyaltyProgram_F.php">
         <button type="button">Admin View</button>
     </a>
 

@@ -145,7 +145,7 @@ function refuel() {
     oldForm.parentNode.insertBefore(form, oldForm.nextElementSibling);
 }
 
-function validateFuel(event) {
+function validateFuel() {
     const pNum = Number(pLitre);
     const dNum = Number(dLitre);
     const rateNum = Number(fuelRate);
@@ -165,7 +165,6 @@ function validateFuel(event) {
         setTimeout(() => {
             mssg.remove();
         }, 2000);
-        event.preventDefault();
         return false;
     }
     if (!dNum || isNaN(dNum) || dNum < 0) {
@@ -177,7 +176,6 @@ function validateFuel(event) {
         setTimeout(() => {
             mssg.remove();
         }, 2000);
-        event.preventDefault();
         return false;
     }
     if ((pNum != dNum || (refilledLitreInput && refilledLitreInput.value.trim() !== "")) && (isNaN(rateNum) || rateNum <= 0)) {
@@ -189,7 +187,6 @@ function validateFuel(event) {
         setTimeout(() => {
             mssg.remove();
         }, 2000);
-        event.preventDefault();
         return false;
     }
     if (pNum < dNum && (!refilledLitreInput || refillnum <= 0)) {
@@ -201,7 +198,6 @@ function validateFuel(event) {
         setTimeout(() => {
             mssg.remove();
         }, 2000);
-        event.preventDefault();
         return false;
     }
     if (refillnum > 0 && rateNum <= 0) {
@@ -213,7 +209,6 @@ function validateFuel(event) {
         setTimeout(() => {
             mssg.remove();
         }, 2000);
-        event.preventDefault();
         return false;
     }
     return true;

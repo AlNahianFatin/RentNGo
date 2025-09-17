@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("homeLogin").onclick = function () {
-        window.location.href = "indexN.html";
+        window.location.href = "../view/index.html";
     };
     document.getElementById("homeSignup").onclick = function () {
-        window.location.href = "signup_N.html";
+        window.location.href = "../view/signup_N.html";
     };
 });
 
