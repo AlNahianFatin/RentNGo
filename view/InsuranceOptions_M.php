@@ -2,8 +2,6 @@
 session_start();
 require_once "../model/db_connect.php";
 
-header("Content-Type: application/json");
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tier     = $_POST["coverageTier"];
     $deduct   = $_POST["deductible"];
@@ -23,24 +21,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($error) {
-        echo json_encode(["success"=>false, "message"=>$error]);
+        echo "<h2 style='color:red;'>$error</h2><a href='InsuranceOptions_M.html'>⬅ Go back</a>";
+    } else {
+        $sql = "INSERT INTO insurance (booking_id, coverage_tier, deductible, claim_scenario) 
+                VALUES ('{$_SESSION["booking_id"]}', '$tier', '$deduct', '$scenario')";
+
+        if (!mysqli_query($conn, $sql)) {
+            die("Insert failed: " . mysqli_error($conn));
+        }
+
+        $_SESSION["insurance_id"] = mysqli_insert_id($conn);
+        header("Location: Review&Rating_M.html");
         exit;
     }
-
-    $sql = "INSERT INTO insurance (booking_id, coverage_tier, deductible, claim_scenario) 
-            VALUES ('{$_SESSION["booking_id"]}', '$tier', '$deduct', '$scenario')";
-
-    if (!mysqli_query($conn, $sql)) {
-        echo json_encode(["success"=>false, "message"=>"Database insert failed"]);
-        exit;
-    }
-
-    $_SESSION["insurance_id"] = mysqli_insert_id($conn);
-
-    echo json_encode([
-        "success" => true,
-        "message" => "Insurance saved successfully!",
-        "next" => "Review&Rating_M.html"
-    ]);
 }
 ?>

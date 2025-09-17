@@ -1,22 +1,24 @@
-document.getElementById("reviewForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const formData = new FormData(this);
+let form = document.getElementById("reviewForm");
 
-  fetch("Review&Rating_M.php", {
-    method: "POST",
-    body: formData
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      alert(data.message);
-      window.location.href = data.next;
+form.addEventListener("submit", function(e) {
+  document.getElementById("nameError").textContent = "";
+  document.getElementById("ratingError").textContent = "";
+  document.getElementById("commentError").textContent = "";
+
+  let name = form.name.value.trim();
+  let rating = form.rating.value;
+  let comment = form.comment.value.trim();
+
+  let validationError = Review.validate(name, rating, comment);
+
+  if (validationError) {
+    e.preventDefault(); 
+    if (validationError.includes("Name")) {
+      document.getElementById("nameError").textContent = validationError;
+    } else if (validationError.includes("rating")) {
+      document.getElementById("ratingError").textContent = validationError;
     } else {
-      alert("❌ " + data.message);
+      document.getElementById("commentError").textContent = validationError;
     }
-  })
-  .catch(err => {
-    console.error("Error:", err);
-    alert("Something went wrong!");
-  });
+  }
 });

@@ -1,22 +1,18 @@
-document.getElementById("bookingForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const formData = new FormData(this);
+let form = document.getElementById("bookingForm");
+let errorMessage = document.getElementById("errorMessage");
 
-  fetch("BookingCalendar_M.php", {
-    method: "POST",
-    body: formData
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      alert(data.message);
-      window.location.href = data.next;
-    } else {
-      alert("❌ " + data.message);
-    }
-  })
-  .catch(err => {
-    console.error("Error:", err);
-    alert("Something went wrong!");
-  });
+form.addEventListener("submit", function (e) {
+  errorMessage.textContent = "";
+
+  let validationError = Booking.validate(
+    form.pickupDate.value,
+    form.pickupTime.value,
+    form.returnDate.value,
+    form.returnTime.value
+  );
+
+  if (validationError) {
+    e.preventDefault();
+    errorMessage.textContent = validationError;
+  }
 });

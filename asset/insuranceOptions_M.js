@@ -1,22 +1,17 @@
-document.getElementById("insuranceForm").addEventListener("submit", function(e){
-  e.preventDefault();
-  const formData = new FormData(this);
+let form = document.getElementById("insuranceForm");
+let errorMessage = document.getElementById("errorMessage");
 
-  fetch("InsuranceOptions_M.php", {
-    method: "POST",
-    body: formData
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      alert(data.message);
-      window.location.href = data.next;
-    } else {
-      alert("❌ " + data.message);
-    }
-  })
-  .catch(err => {
-    console.error("Error:", err);
-    alert("Something went wrong!");
-  });
+form.addEventListener("submit", function (e) {
+  errorMessage.textContent = "";
+
+  let validationError = Insurance.validate(
+    form.coverageTier.value,
+    form.deductible.value,
+    form.claimScenario.value.trim()
+  );
+
+  if (validationError) {
+    e.preventDefault();
+    errorMessage.textContent = validationError;
+  }
 });

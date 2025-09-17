@@ -2,8 +2,6 @@
 session_start();
 require_once "../model/db_connect.php";
 
-header("Content-Type: application/json");
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $vehicleId      = trim($_POST["vehicleId"]);
     $damageType     = $_POST["damageType"];
@@ -20,25 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($error) {
-        echo json_encode(["success"=>false, "message"=>$error]);
+        echo "<h2 style='color:red;'>$error</h2><a href='DamageReports_M.html'>⬅ Go back</a>";
+    } else {
+        $sql = "INSERT INTO damage_reports (booking_id, vehicle_id, damage_type, damage_photo, signature, signature_photo) 
+                VALUES ('{$_SESSION["booking_id"]}', '$vehicleId', '$damageType', '$photoName', '$signature', '$signaturePhoto')";
+
+        if (!mysqli_query($conn, $sql)) {
+            die("Insert failed: " . mysqli_error($conn));
+        }
+
+        $_SESSION["damage_id"] = mysqli_insert_id($conn);
+        header("Location: InsuranceOptions_M.html");
         exit;
     }
-
-    // ⚠️ Note: files are not being moved, only filenames stored
-    $sql = "INSERT INTO damage_reports (booking_id, vehicle_id, damage_type, damage_photo, signature, signature_photo) 
-            VALUES ('{$_SESSION["booking_id"]}', '$vehicleId', '$damageType', '$photoName', '$signature', '$signaturePhoto')";
-
-    if (!mysqli_query($conn, $sql)) {
-        echo json_encode(["success"=>false, "message"=>"Database insert failed"]);
-        exit;
-    }
-
-    $_SESSION["damage_id"] = mysqli_insert_id($conn);
-
-    echo json_encode([
-        "success" => true,
-        "message" => "Damage report submitted!",
-        "next" => "InsuranceOptions_M.html"
-    ]);
 }
 ?>

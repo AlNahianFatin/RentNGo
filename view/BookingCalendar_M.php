@@ -2,8 +2,6 @@
 session_start();
 require_once "../model/db_connect.php";
 
-header("Content-Type: application/json");
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $pickupDate  = $_POST["pickupDate"];
     $pickupTime  = $_POST["pickupTime"];
@@ -30,31 +28,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     if ($error) {
-        echo json_encode(["success"=>false, "message"=>$error]);
+        echo "<h2 style='color:red;'>$error</h2><a href='BookingCalendar_M.html'>⬅ Go back</a>";
+    } else {
+        $sql = "INSERT INTO bookings (vehicle_type, pickup_date, pickup_time, return_date, return_time, role) 
+                VALUES ('$vehicleType', '$pickupDate', '$pickupTime', '$returnDate', '$returnTime', '$role')";
+
+        if (!mysqli_query($conn, $sql)) {
+            die("Insert failed: " . mysqli_error($conn));
+        }
+
+        // ✅ save booking info in session
+        $_SESSION["booking_id"] = mysqli_insert_id($conn);
+        $_SESSION["vehicleType"] = $vehicleType;
+        $_SESSION["pickupDate"]  = $pickupDate;
+        $_SESSION["pickupTime"]  = $pickupTime;
+        $_SESSION["returnDate"]  = $returnDate;
+        $_SESSION["returnTime"]  = $returnTime;
+
+        // ✅ save last vehicle in a cookie (valid for 30 days)
+        setcookie("lastVehicle", $vehicleType, time() + (30 * 24 * 60 * 60), "/");
+
+        header("Location: PricingCalculator_M.html");
         exit;
     }
-
-    $sql = "INSERT INTO bookings (vehicle_type, pickup_date, pickup_time, return_date, return_time, role) 
-            VALUES ('$vehicleType', '$pickupDate', '$pickupTime', '$returnDate', '$returnTime', '$role')";
-
-    if (!mysqli_query($conn, $sql)) {
-        echo json_encode(["success"=>false, "message"=>"Database insert failed"]);
-        exit;
-    }
-
-    $_SESSION["booking_id"] = mysqli_insert_id($conn);
-    $_SESSION["vehicleType"] = $vehicleType;
-    $_SESSION["pickupDate"]  = $pickupDate;
-    $_SESSION["pickupTime"]  = $pickupTime;
-    $_SESSION["returnDate"]  = $returnDate;
-    $_SESSION["returnTime"]  = $returnTime;
-
-    setcookie("lastVehicle", $vehicleType, time() + (30 * 24 * 60 * 60), "/");
-
-    echo json_encode([
-        "success" => true,
-        "message" => "Booking confirmed!",
-        "next" => "PricingCalculator_M.html"
-    ]);
 }
 ?>
