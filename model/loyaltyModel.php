@@ -40,17 +40,16 @@ function getLoyaltyBySName($sName) {
     $sql = "SELECT * FROM loyalty WHERE scheme = '$sNameEscaped'";
     $result = mysqli_query($conn, $sql);
 
-    $records = [];
+    $record = null;
 
-    if($result && mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result))
-            $records [] = $row;
+    if($result && mysqli_num_rows($result) === 1) {
+        $record = mysqli_fetch_assoc($result);
         mysqli_close($conn);
-        return $records;
+        return $record;
     }
     else {
         mysqli_close($conn);
-        return $records;
+        return $record;
     }
 }
 

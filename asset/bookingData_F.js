@@ -1,3 +1,12 @@
+let debounceTimer;
+const customerInput = document.getElementById("Customer");
+customerInput.addEventListener("input", () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+        searchCustomer();
+    }, 200);
+});
+
 let mssg = document.createElement("label");
 mssg.id = "msg";
 mssg.style.position = "fixed";
@@ -64,15 +73,6 @@ function searchCustomer() {
         mssg.remove();
     // return true;
 }
-
-let debounceTimer;
-const customerInput = document.getElementById("Customer");
-customerInput.addEventListener("input", () => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => {
-        searchCustomer();
-    }, 200);
-});
 
 function downloadPDF() {
     let customer = document.getElementById("Customer").value.trim();
