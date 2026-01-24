@@ -1,0 +1,761 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: poppins, sans-serif;
+}
+
+body {
+    background-color: rgb(217, 212, 212);
+}
+
+/* indexN.html */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30%;
+    padding: 25px 10px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    z-index: 100;
+}
+
+.navBar a {
+    position: relative;
+    font-size: 16px;
+    color: beige;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 1vw;
+}
+
+.navBar a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 0.5vh;
+    background-color: beige;
+    border-radius: 5px;
+    transform: translateY(10px);
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.navBar a:hover::after {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('Porsche Wallpaper – stilvolle kostenlose Hintergrundbilder für Deine Devices.jpg') no-repeat center center/cover;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 550px;
+    width: 75%;
+    background: url('Porsche Wallpaper – stilvolle kostenlose Hintergrundbilder für Deine Devices.jpg') no-repeat center center/cover;
+    border-radius: 10px;
+}
+
+.container .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 58%;
+    height: 100%;
+    padding: 80px;
+    color: azure;
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    background: transparent
+}
+
+.container .form {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 58%);
+    height: 100%;
+}
+
+.content .icon {
+    color: beige;
+    font-size: 30px;
+}
+
+.text h2 {
+    color: beige;
+    font-size: 40px;
+    line-height: 1;
+}
+
+.form .formContainer {
+    height: 100%;
+    width: 100%;
+    backdrop-filter: blur(7px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: 2px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    color: white;
+}
+
+.formContainer h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.formContainer .uName {
+    width: 300px;
+    height: 50px;
+}
+
+.formContainer .pass {
+    width: 300px;
+    height: 50px;
+}
+
+.remember {
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    margin: -15px 0 15px;
+}
+
+.remember a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 45px;
+}
+
+.remember :hover {
+    text-decoration: underline;
+}
+#lbtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(58, 58, 60);
+    color: thistle;
+    width: 20vw;
+    height: 45px;
+    border: 2px solid thistle;
+    border-radius: 5px;
+    float: center;
+}
+
+#lbtn:hover {
+    background-color: rgb(34, 34, 35);
+    font-size: 16px;
+    border: 3.5px solid thistle;
+    box-shadow: 2px 2px 5px thistle;
+    width: 102%;
+    height: 47px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+#lbtn:active {
+    background-color: rgb(58, 58, 60);
+    color: thistle;
+    width: 100%;
+    height: 45px;
+    border: 2px solid thistle;
+    border-radius: 5px;
+}
+
+#rst {
+    background-color: rgb(137, 31, 31);
+    color: thistle;
+    width: 100%;
+    height: 45px;
+    border: 2px solid thistle;
+    border-radius: 5px;
+    float: center;
+}
+
+#rst:hover {
+    background-color: rgb(186, 50, 48);
+    font-size: 16px;
+    border: 3.5px solid thistle;
+    box-shadow: 2px 2px 5px thistle;
+    width: 102%;
+    height: 47px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+#rst:active {
+    background-color: rgb(137, 31, 31);
+    color: thistle;
+    width: 100%;
+    height: 45px;
+    border: 2px solid thistle;
+    border-radius: 5px;
+}
+
+.uName,
+.pass {
+    position: relative;
+    width: 100%;
+    height: 45px;
+}
+
+.uName input,
+.pass input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 2px solid thistle;
+    font-size: 16px;
+    color: white;
+    padding: 0 12px;
+}
+
+.uName label,
+.pass label {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    transform: translateY(-50%);
+    font-size: 16px;
+    color: white;
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.uName,
+.pass {
+    margin: 5px 0;
+}
+
+#Msg {
+    position: absolute;
+    bottom: 20px;
+    color: rgb(216, 187, 0);
+}
+
+.signup {
+    color: rgb(7, 134, 159);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.signup:hover {
+    text-decoration: underline;
+}
+
+/* homepage */
+.homeNavBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: black;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.homeNavBar a {
+    color: black;
+    text-decoration: none;
+    padding: 12px 16px;
+    transition: 0.3s;
+}
+
+.homeNavBar a:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+/* inventoryN.html */
+.inventory {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
+    background-color: rgb(2, 43, 43);
+}
+
+.slider {
+    width: 200px;
+    height: 100vh;
+    background: #ddd;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+/* Logout button */
+#lgoutBtn {
+    position: absolute;
+    margin-top: 20px;
+    background: red;
+    color: white;
+    padding: 10px;
+    border: 2px solid black;
+    cursor: pointer;
+    width: 80%;
+    bottom: 50px;
+    left: 10px;
+    border-radius: 20px;
+}
+#lgoutBtn:hover {
+    background: darkred;
+    transition: 0.5s;
+    height: 45px;
+    width: 85%;
+    box-shadow: 2px 2px 5px black;
+    font-size: medium;
+    transition: 0.5s;
+
+}
+#lgoutBtn:active {
+    background: red;
+    height: 40px;
+    width: 80%;
+    box-shadow: none;
+    font-size: medium;
+}
+#confirmBox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    border-radius: 20px;
+}
+
+#confirmCard {
+    background: white;
+    width: 300px;
+    margin: 20% auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    background-color: rgb(213, 216, 196);
+    border: 5px solid black;
+}
+
+#okBtn,
+#cnclBtn {
+    padding: 8px 15px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+#okBtn {
+    background: green;
+    color: white;
+    border: 2px solid black;
+}
+
+#cnclBtn {
+    background: gray;
+    color: white;
+    border-radius: 25px;
+    border: 2px solid black;
+}
+
+#okBtn:hover {
+    background: darkgreen;
+    transition: 0.5s;
+}
+#okBtn:active {
+    background: green;
+}
+
+#cnclBtn:hover {
+    background: rgb(64, 63, 63);
+    border-radius: 25px;
+    transition: 0.5s;
+}
+#cnclBtn:active {
+    background: rgb(64, 63, 63);
+}
+
+#okBtn:hover {
+    background: darkgreen;
+    transition: 0.5s;
+}
+#okBtn:active {
+    background: green;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 30px;
+}
+
+.iNav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: beige;
+    border-radius: 5px;
+    transform: translateY(10px);
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.iNav a:hover::after {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+#search {
+    margin-top: 0px;
+    height: 25px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    background-color: rgb(2, 43, 43);
+    color: white;
+}
+
+
+/* customerProfile */
+.customer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
+    background-color: rgb(2, 43, 43);
+}
+
+.customerNav a {
+    position: relative;
+    font-size: 16px;
+    color: beige;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 30px;
+}
+
+.customerNav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: beige;
+    border-radius: 5px;
+    transform: translateY(10px);
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.customerNav a:hover::after {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+#cSrscBtn {
+    margin-top: 0px;
+    height: 25px;
+    background-color: rgb(2, 43, 43);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#cSrscBtn:hover {
+    background-color: rgb(16, 53, 239);
+}
+
+.profile{
+    position: absolute;
+    top:150px;
+    left:50%;
+    right: 50%;
+}
+.profileInfo{
+    background-color: rgb(130, 123, 123);
+    padding: 20px;
+    border: 2.5px solid red;
+    border-radius: 10px;
+    width: 300px;
+    text-align: left;
+    height: 60vh;
+    width: 320px;
+}
+
+.cfooter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    text-align: center;
+    background-color: rgb(2, 43, 43);
+    color: white;
+}
+#logoutBtn {
+    position: absolute;
+    bottom: 20px;
+    left: 5%;
+    transform: translateX(28%);
+    background: rgb(164, 30, 30);
+    color: white;
+    padding: 10px;
+    border: 2px solid rgb(17, 16, 16);
+    cursor: pointer;
+    width: 70px;
+    border-radius: 20px;
+    text-align: center;
+}
+#logoutBtn:hover {
+    background: rgb(126, 46, 46);
+    transition: 0.5s;
+    height: 45px;
+    width: 75px;
+    box-shadow: 2px 2px 5px black;
+    font-size: medium;
+    transition: 0.2s;
+
+}
+#logoutBtn:active {
+    background: rgb(164, 30, 30);
+    height: 40px;
+    width: 70px;
+    box-shadow: none;
+}
+#edit {
+    position: absolute;
+    bottom: 20px;
+    transform: translateX(250%);
+    background: rgb(63, 56, 56);
+    color: white;
+    padding: 10px;
+    border: 2px solid rgb(11, 11, 11);
+    cursor: pointer;
+    width: 70px;
+    border-radius: 20px;
+    text-align: center;
+}
+#edit:hover {
+    background: rgb(20, 19, 19);
+    transition: 0.5s;
+    height: 45px;
+    width: 75px;
+    box-shadow: 2px 2px 5px black;
+    font-size: medium;
+    transition: 0.2s;
+    bottom: 20px;
+    transform: translateX(250%);
+
+}
+#edit:active {
+    background: rgb(63, 56, 56);
+    height: 40px;
+    width: 70px;
+    box-shadow: none;
+}
+
+/* homepage */
+.homeheader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 25px 10px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
+    background-color: rgb(160, 203, 203);
+}
+
+.homeNavBar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.homeNavBar a {
+    font-size: 16px;
+    color: beige;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 15px;
+    position: relative;
+}
+
+.homeNavBar a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 2px;
+    background-color: beige;
+    border-radius: 5px;
+    transform: translateY(10px);
+    transition: 0.5s;
+    opacity: 0;
+}
+
+.homeNavBar a:hover::after {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* ✅ Button styling */
+.homeNavBar button {
+    font-size: 16px;
+    background-color: red;
+    color: white;
+    border: 2px solid white;
+    padding: 5px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 10px;
+    transition: background-color 0.3s;
+}
+
+.homeNavBar button:hover {
+    background-color: darkred;
+}
+
+/* error page */
+.error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: 50px 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    width: 70%;
+    background-color: #f5f5f5; /* optional */
+}
+
+.error h1 {
+    font-size: 36px;
+    color: red;
+}
+
+.error p {
+    font-size: 18px;
+    color: #333;
+}
+
+/* customer profile edit button */
+#editBox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    border-radius: 20px;
+}
+
+#editCard {
+    background: white;
+    width: 300px;
+    margin: 20% auto;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    background-color: rgb(213, 216, 196);
+    border: 5px solid black;
+}
+
+#editokBtn,
+#editcnclBtn {
+    padding: 8px 15px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 25px;
+}
+
+#editcnclBtn {
+    background: green;
+    color: white;
+    border: 2px solid black;
+}
+
+#editcnclBtn {
+    background: gray;
+    color: white;
+    border-radius: 25px;
+    border: 2px solid black;
+}
+
+#editokBtn:hover {
+    background: darkgreen;
+    transition: 0.5s;
+}
+#editokBtn:active {
+    background: green;
+}
+
+#editcnclBtn:hover {
+    background: rgb(64, 63, 63);
+    border-radius: 25px;
+    transition: 0.5s;
+}
+#editcnclBtn:active {
+    background: rgb(64, 63, 63);
+}
+
+#editokBtn:hover {
+    background: darkgreen;
+    transition: 0.5s;
+}
+#editokBtn:active {
+    background: green;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 30px;
+}

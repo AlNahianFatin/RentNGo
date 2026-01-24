@@ -1,0 +1,59 @@
+/* ===============================
+   Insurance Options Page Styles
+   =============================== */
+body {
+  background: linear-gradient(to right, #f7971e, #ffd200);
+  font-family: "Segoe UI", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+form {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 550px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+h2 {
+  text-align: center;
+  color: #f7971e;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin: 8px 0 5px;
+  font-weight: bold;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #f7971e;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #d67d0d;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}

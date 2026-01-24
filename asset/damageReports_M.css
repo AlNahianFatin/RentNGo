@@ -1,0 +1,66 @@
+/* ===============================
+   Damage Report Page Styles
+   =============================== */
+body {
+  background: linear-gradient(to top, #ff9a9e, #fad0c4);
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+form {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 550px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #d44a4a;
+}
+
+label {
+  display: block;
+  margin: 8px 0 5px;
+  font-weight: bold;
+}
+
+input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #d44a4a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #b23838;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+img {
+  max-height: 120px;
+  border-radius: 8px;
+  display: none;
+  margin-top: 10px;
+}
